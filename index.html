@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Computer Science Student Portfolio - AI & Computer Vision Enthusiast showcasing innovative projects and technical expertise">
+    <meta name="keywords" content="Computer Science, AI, Computer Vision, Machine Learning, Portfolio, Student, Developer">
+    <meta name="author" content="Alex Thompson">
+    <meta property="og:title" content="Alex Thompson - CS Student Portfolio">
+    <meta property="og:description" content="Computer Science Student specializing in AI & Computer Vision">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <title>Alex Thompson - CS Student Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Alex Thompson",
+      "jobTitle": "Computer Science Student",
+      "description": "AI & Computer Vision Enthusiast",
+      "url": "https://alexthompson-portfolio.com"
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="nav-logo-text">AT</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Alex Thompson</h1>
+                <p class="hero-subtitle">Computer Science Student | AI & Computer Vision Enthusiast</p>
+                <div class="hero-tagline">
+                    <span id="cycling-text">Problem Solver</span>
+                </div>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Connect With Me</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-description">
+                        I'm a passionate Computer Science student with a deep fascination for artificial intelligence and computer vision. 
+                        Currently pursuing my Bachelor's degree, I've developed expertise in machine learning algorithms, neural networks, 
+                        and image processing techniques. My journey began with curiosity about how computers can "see" and understand the world, 
+                        leading me to work on projects ranging from text classification models achieving 94% accuracy to real-time object detection systems.
+                    </p>
+                    <p class="about-description">
+                        Beyond academics, I thrive on solving complex problems through code, contributing to open-source projects, and 
+                        staying at the forefront of technological innovation. I believe in the power of AI to transform industries and 
+                        improve lives, and I'm committed to being part of that transformation.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">Projects Completed</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3.8</span>
+                            <span class="stat-label">GPA</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">2</span>
+                            <span class="stat-label">Research Papers</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-container">
+                        <img src="https://images.pexels.com/photos/3182796/pexels-photo-3182796.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                             alt="Alex Thompson - Computer Science Student" 
+                             class="profile-image"
+                             loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Skills & Expertise</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card" data-skill="python">
+                    <div class="skill-icon">🐍</div>
+                    <h3 class="skill-title">Python</h3>
+                    <p class="skill-description">Built text classification model with 94% accuracy</p>
+                    <div class="skill-level">
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-level="95"></div>
+                        </div>
+                        <span class="skill-percentage">95%</span>
+                    </div>
+                </div>
+                
+                <div class="skill-card" data-skill="machine-learning">
+                    <div class="skill-icon">🤖</div>
+                    <h3 class="skill-title">Machine Learning</h3>
+                    <p class="skill-description">TensorFlow, PyTorch, scikit-learn expertise</p>
+                    <div class="skill-level">
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-level="90"></div>
+                        </div>
+                        <span class="skill-percentage">90%</span>
+                    </div>
+                </div>
+                
+                <div class="skill-card" data-skill="computer-vision">
+                    <div class="skill-icon">👁️</div>
+                    <h3 class="skill-title">Computer Vision</h3>
+                    <p class="skill-description">OpenCV, image processing, object detection</p>
+                    <div class="skill-level">
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-level="85"></div>
+                        </div>
+                        <span class="skill-percentage">85%</span>
+                    </div>
+                </div>
+                
+                <div class="skill-card" data-skill="web-development">
+                    <div class="skill-icon">🌐</div>
+                    <h3 class="skill-title">Web Development</h3>
+                    <p class="skill-description">React, Node.js, modern JavaScript</p>
+                    <div class="skill-level">
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-level="88"></div>
+                        </div>
+                        <span class="skill-percentage">88%</span>
+                    </div>
+                </div>
+                
+                <div class="skill-card" data-skill="data-science">
+                    <div class="skill-icon">📊</div>
+                    <h3 class="skill-title">Data Science</h3>
+                    <p class="skill-description">Pandas, NumPy, data visualization</p>
+                    <div class="skill-level">
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-level="82"></div>
+                        </div>
+                        <span class="skill-percentage">82%</span>
+                    </div>
+                </div>
+                
+                <div class="skill-card" data-skill="algorithms">
+                    <div class="skill-icon">⚡</div>
+                    <h3 class="skill-title">Algorithms & DS</h3>
+                    <p class="skill-description">Problem solving, competitive programming</p>
+                    <div class="skill-level">
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-level="87"></div>
+                        </div>
+                        <span class="skill-percentage">87%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Projects & Achievements</h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="ai">AI & ML</button>
+                <button class="filter-btn" data-filter="web">Web Dev</button>
+                <button class="filter-btn" data-filter="research">Research</button>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card featured" data-category="ai">
+                    <div class="project-image">
+                        <img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" 
+                             alt="AI Text Classification Project" loading="lazy">
+                        <div class="project-overlay">
+                            <a href="#" class="project-link">View Details</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-badge">Featured</div>
+                        <h3 class="project-title">AI Text Classification System</h3>
+                        <p class="project-description">
+                            Developed a sophisticated text classification model using BERT architecture, achieving 94% accuracy on sentiment analysis tasks.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">TensorFlow</span>
+                            <span class="tag">BERT</span>
+                            <span class="tag">NLP</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="ai">
+                    <div class="project-image">
+                        <img src="https://images.pexels.com/photos/8439093/pexels-photo-8439093.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" 
+                             alt="Computer Vision Object Detection" loading="lazy">
+                        <div class="project-overlay">
+                            <a href="#" class="project-link">View Details</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Real-time Object Detection</h3>
+                        <p class="project-description">
+                            Built a real-time object detection system using YOLO v8 with custom training on medical equipment dataset.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">OpenCV</span>
+                            <span class="tag">YOLO</span>
+                            <span class="tag">PyTorch</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card featured" data-category="web">
+                    <div class="project-image">
+                        <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" 
+                             alt="Student Management Platform" loading="lazy">
+                        <div class="project-overlay">
+                            <a href="#" class="project-link">View Details</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-badge">Award Winner</div>
+                        <h3 class="project-title">Smart Campus Management System</h3>
+                        <p class="project-description">
+                            Full-stack web application for university management with AI-powered course recommendations. Won 1st place in university hackathon.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">MongoDB</span>
+                            <span class="tag">AI</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="research">
+                    <div class="project-image">
+                        <img src="https://images.pexels.com/photos/8439093/pexels-photo-8439093.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" 
+                             alt="Research Paper on Deep Learning" loading="lazy">
+                        <div class="project-overlay">
+                            <a href="#" class="project-link">View Details</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Deep Learning Research</h3>
+                        <p class="project-description">
+                            Co-authored research paper on improving neural network efficiency through novel attention mechanisms. Published in IEEE conference.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Research</span>
+                            <span class="tag">Deep Learning</span>
+                            <span class="tag">Attention</span>
+                            <span class="tag">IEEE</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="web">
+                    <div class="project-image">
+                        <img src="https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" 
+                             alt="E-learning Platform" loading="lazy">
+                        <div class="project-overlay">
+                            <a href="#" class="project-link">View Details</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Interactive Learning Platform</h3>
+                        <p class="project-description">
+                            Responsive e-learning platform with video streaming, progress tracking, and gamification elements.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Vue.js</span>
+                            <span class="tag">Express</span>
+                            <span class="tag">PostgreSQL</span>
+                            <span class="tag">AWS</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="ai">
+                    <div class="project-image">
+                        <img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" 
+                             alt="Recommendation System" loading="lazy">
+                        <div class="project-overlay">
+                            <a href="#" class="project-link">View Details</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">AI Recommendation Engine</h3>
+                        <p class="project-description">
+                            Machine learning-based recommendation system using collaborative filtering and matrix factorization techniques.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">scikit-learn</span>
+                            <span class="tag">Pandas</span>
+                            <span class="tag">Flask</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="education section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Education & Experience</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022 - 2026</div>
+                        <h3 class="timeline-title">Bachelor of Science in Computer Science</h3>
+                        <h4 class="timeline-subtitle">Stanford University</h4>
+                        <p class="timeline-description">
+                            GPA: 3.8/4.0 • Relevant Coursework: Machine Learning, Computer Vision, Algorithms & Data Structures, 
+                            Database Systems, Software Engineering, Artificial Intelligence
+                        </p>
+                        <div class="timeline-achievements">
+                            <span class="achievement">Dean's List (4 semesters)</span>
+                            <span class="achievement">CS Honor Society</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Summer 2024</div>
+                        <h3 class="timeline-title">Machine Learning Research Intern</h3>
+                        <h4 class="timeline-subtitle">Google AI Research</h4>
+                        <p class="timeline-description">
+                            Worked on improving neural network efficiency through novel attention mechanisms. Contributed to research 
+                            paper published in IEEE conference. Collaborated with PhD researchers and senior engineers.
+                        </p>
+                        <div class="timeline-achievements">
+                            <span class="achievement">Published Research Paper</span>
+                            <span class="achievement">10% Performance Improvement</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023 - Present</div>
+                        <h3 class="timeline-title">Teaching Assistant</h3>
+                        <h4 class="timeline-subtitle">CS106A: Programming Methodology</h4>
+                        <p class="timeline-description">
+                            Mentor 50+ students in introductory programming concepts using Java. Lead weekly discussion sections, 
+                            grade assignments, and provide one-on-one tutoring for struggling students.
+                        </p>
+                        <div class="timeline-achievements">
+                            <span class="achievement">4.9/5 Student Rating</span>
+                            <span class="achievement">Excellence in Teaching Award</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023 - Present</div>
+                        <h3 class="timeline-title">Vice President</h3>
+                        <h4 class="timeline-subtitle">AI & Machine Learning Club</h4>
+                        <p class="timeline-description">
+                            Lead technical workshops, organize guest speaker events, and coordinate hackathons. 
+                            Grew club membership from 50 to 200+ students in one year.
+                        </p>
+                        <div class="timeline-achievements">
+                            <span class="achievement">4x Membership Growth</span>
+                            <span class="achievement">12 Workshops Organized</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="resume section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Resume</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="resume-content">
+                <div class="resume-preview">
+                    <div class="resume-placeholder">
+                        <div class="resume-icon">📄</div>
+                        <h3>Alex Thompson - Resume</h3>
+                        <p>Computer Science Student | AI & Computer Vision Specialist</p>
+                    </div>
+                </div>
+                <div class="resume-actions">
+                    <a href="#" class="btn btn-primary resume-download" download>
+                        <span class="btn-icon">⬇️</span>
+                        Download Resume
+                    </a>
+                    <a href="#" class="btn btn-secondary resume-view">
+                        <span class="btn-icon">👁️</span>
+                        View Online
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Let's Build Something Awesome Together!</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">
+                    Ready to collaborate on innovative projects or discuss exciting opportunities? 
+                    I'd love to hear from you.
+                </p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-form-container">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name *</label>
+                            <input type="text" id="name" name="name" class="form-input" required>
+                            <span class="form-error" id="name-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                            <span class="form-error" id="email-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject" class="form-label">Subject *</label>
+                            <input type="text" id="subject" name="subject" class="form-input" required>
+                            <span class="form-error" id="subject-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea id="message" name="message" class="form-textarea" rows="5" required></textarea>
+                            <span class="form-error" id="message-error"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary form-submit">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-loading" style="display: none;">Sending...</span>
+                        </button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">📧</div>
+                        <h3>Email</h3>
+                        <p>alex.thompson@email.com</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">🔗</div>
+                        <h3>LinkedIn</h3>
+                        <p>linkedin.com/in/alexthompson</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">💻</div>
+                        <h3>GitHub</h3>
+                        <p>github.com/alexthompson</p>
+                    </div>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/alexthompson" class="social-link" aria-label="LinkedIn">
+                    <span class="social-icon">🔗</span>
+                </a>
+                <a href="https://github.com/alexthompson" class="social-link" aria-label="GitHub">
+                    <span class="social-icon">💻</span>
+                </a>
+                <a href="mailto:alex.thompson@email.com" class="social-link" aria-label="Email">
+                    <span class="social-icon">📧</span>
+                </a>
+                <a href="https://twitter.com/alexthompson" class="social-link" aria-label="Twitter">
+                    <span class="social-icon">🐦</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2024 Alex Thompson. All rights reserved.</p>
+                </div>
+                <div class="footer-nav">
+                    <a href="#home" class="footer-link">Home</a>
+                    <a href="#about" class="footer-link">About</a>
+                    <a href="#projects" class="footer-link">Projects</a>
+                    <a href="#contact" class="footer-link">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" class="footer-social-link" aria-label="LinkedIn">🔗</a>
+                    <a href="#" class="footer-social-link" aria-label="GitHub">💻</a>
+                    <a href="#" class="footer-social-link" aria-label="Email">📧</a>
+                </div>
+            </div>
+        </div>
+        <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+            <span class="back-to-top-arrow">↑</span>
+        </button>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

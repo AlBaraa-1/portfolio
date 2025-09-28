@@ -35,7 +35,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
           <div
         ref={cardRef}
-        className={`bg-opacity-20 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg transition-all duration-500 sm:hover:scale-105 active:scale-98 sm:hover:shadow-xl touch-none sm:touch-auto transform ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+        className={`bg-opacity-20 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg transition-all duration-500 sm:hover:scale-105 active:scale-98 sm:hover:shadow-xl transform ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
         style={{ backgroundColor: 'var(--bg-secondary)' }}>
       {/* Project Image */}
       <div className="relative overflow-hidden h-48">

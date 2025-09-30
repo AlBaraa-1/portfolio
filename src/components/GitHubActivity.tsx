@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { GitBranch, Star, GitCommit, Calendar } from 'lucide-react';
+import { GitBranch, Star, GitCommitVertical as GitCommit, Calendar } from 'lucide-react';
 
 interface GitHubRepo {
   name: string;

@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Send, Linkedin, Github, Mail, Terminal } from 'lucide-react';
+import { Send, Linkedin, Github, Mail, Terminal, CheckCircle } from 'lucide-react';
+import { submitContactForm } from '../lib/supabase';
 
 const Contact: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    subject: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [terminalOutput, setTerminalOutput] = useState<string[]>([
     '> Terminal initialized...',
     '> Available commands loaded',
@@ -102,16 +105,33 @@ const Contact: React.FC = () => {
     setTerminalOutput(newOutput);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
     const newOutput = [...terminalOutput];
     newOutput.push('> send-message --submit');
-    newOutput.push('Message sent successfully! ✅');
-    newOutput.push('Thank you for reaching out. I\'ll get back to you soon!');
+    newOutput.push('Submitting message...');
     setTerminalOutput(newOutput);
-    
-    // Reset form
-    setFormData({ name: '', email: '', message: '' });
+
+    const result = await submitContactForm({
+      name: formData.name,
+      email: formData.email,
+      subject: formData.subject,
+      message: formData.message
+    });
+
+    const finalOutput = [...newOutput];
+    if (result.success) {
+      finalOutput.push('Message sent successfully! ✅');
+      finalOutput.push('Thank you for reaching out. I\'ll get back to you soon!');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } else {
+      finalOutput.push('Error sending message. Please try again or email directly.');
+    }
+
+    setTerminalOutput(finalOutput);
+    setIsSubmitting(false);
   };
 
   return (
@@ -294,7 +314,7 @@ const Contact: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2 terminal-prompt" 
+                <label className="block text-sm font-medium mb-2 terminal-prompt"
                        style={{ color: 'var(--accent)' }}>
                   Email
                 </label>
@@ -305,12 +325,32 @@ const Contact: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full px-4 py-3 rounded-lg border bg-transparent transition-all duration-300 focus:outline-none focus:ring-2"
-                  style={{ 
+                  style={{
                     borderColor: 'var(--border)',
                     color: 'var(--text-primary)',
                     backgroundColor: 'var(--bg-primary)'
                   }}
                   placeholder="Enter your email"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2 terminal-prompt"
+                       style={{ color: 'var(--accent)' }}>
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-lg border bg-transparent transition-all duration-300 focus:outline-none focus:ring-2"
+                  style={{
+                    borderColor: 'var(--border)',
+                    color: 'var(--text-primary)',
+                    backgroundColor: 'var(--bg-primary)'
+                  }}
+                  placeholder="Subject (optional)"
                 />
               </div>
 
@@ -337,15 +377,25 @@ const Contact: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-lg font-semibold text-lg border-2 transition-all duration-300 hover:scale-105"
-                style={{ 
+                disabled={isSubmitting}
+                className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-lg font-semibold text-lg border-2 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{
                   borderColor: 'var(--accent)',
                   color: 'var(--accent)',
                   backgroundColor: 'transparent'
                 }}
               >
-                <Send className="w-5 h-5" />
-                <span>&gt;</span> Submit Message
+                {isSubmitting ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                    <span>Sending...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-5 h-5" />
+                    <span>&gt;</span> Submit Message
+                  </>
+                )}
               </button>
             </form>
           </div>

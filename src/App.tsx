@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
+import GitHubActivity from './components/GitHubActivity';
 import Research from './components/Research';
 import Certifications from './components/Certifications';
 import Resume from './components/Resume';
@@ -16,6 +17,7 @@ function App() {
         <Hero />
         <About />
         <Projects />
+        <GitHubActivity />
         <Research />
         <Certifications />
         <Resume />

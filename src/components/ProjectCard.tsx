@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ExternalLink, Github, Eye } from 'lucide-react';
+import { ExternalLink, Github, Eye, TrendingUp } from 'lucide-react';
 import { Project } from '../data/portfolioData';
 
 interface ProjectCardProps {
   project: Project;
+  onOpenDetails: (project: Project) => void;
+  viewCount?: number;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails, viewCount = 0 }) => {
   const [isInView, setIsInView] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -52,6 +54,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           <div className="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-semibold animate-glow"
                style={{ backgroundColor: 'var(--accent)', color: 'var(--bg-primary)' }}>
             ⭐ Featured
+          </div>
+        )}
+
+        {/* View Count Badge */}
+        {viewCount > 0 && (
+          <div className="absolute top-3 left-3 px-2 py-1 rounded-full text-xs font-semibold flex items-center gap-1"
+               style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)', color: 'white' }}>
+            <TrendingUp className="w-3 h-3" />
+            {viewCount} views
           </div>
         )}
       </div>
@@ -119,8 +130,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           )}
           
           <button
+            onClick={() => onOpenDetails(project)}
             className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium border transition-all duration-300 hover:scale-105 min-w-[100px]"
-            style={{ 
+            style={{
               borderColor: 'var(--border)',
               color: 'var(--text-secondary)',
               backgroundColor: 'transparent'

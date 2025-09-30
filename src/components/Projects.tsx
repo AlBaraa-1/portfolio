@@ -1,10 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { projects } from '../data/portfolioData';
+import { projects, Project } from '../data/portfolioData';
 import ProjectCard from './ProjectCard';
+import ProjectDetailModal from './ProjectDetailModal';
+import { getAllProjectViews, trackProjectView, getProjectViewCount } from '../lib/supabase';
 
 const Projects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<'all' | 'ai-cv' | 'web-dev' | 'other'>('all');
   const [isVisible, setIsVisible] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [viewCounts, setViewCounts] = useState<Record<string, number>>({});
+  const [modalViewCount, setModalViewCount] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
   const filters = [
@@ -34,6 +40,33 @@ const Projects: React.FC = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    const loadViewCounts = async () => {
+      const counts = await getAllProjectViews();
+      setViewCounts(counts);
+    };
+
+    loadViewCounts();
+  }, []);
+
+  const handleOpenDetails = async (project: Project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+
+    await trackProjectView(project.id);
+
+    const count = await getProjectViewCount(project.id);
+    setModalViewCount(count);
+
+    const counts = await getAllProjectViews();
+    setViewCounts(counts);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedProject(null), 300);
+  };
 
   return (
     <section id="projects" ref={sectionRef} className="py-20">
@@ -83,7 +116,11 @@ const Projects: React.FC = () => {
                 animation: isVisible ? 'fadeInUp 0.6s ease-out forwards' : 'none'
               }}
             >
-              <ProjectCard project={project} />
+              <ProjectCard
+                project={project}
+                onOpenDetails={handleOpenDetails}
+                viewCount={viewCounts[project.id] || 0}
+              />
             </div>
           ))}
         </div>
@@ -99,6 +136,13 @@ const Projects: React.FC = () => {
           </div>
         )}
       </div>
+
+      <ProjectDetailModal
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        viewCount={modalViewCount}
+      />
 
       <style>{`
         @keyframes fadeInUp {

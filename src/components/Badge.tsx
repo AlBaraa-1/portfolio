@@ -50,11 +50,11 @@ const Badge: React.FC<BadgeProps> = ({ certification }) => {
   return (
     <div className="relative" ref={badgeRef}>
       <div
-        className="group cursor-pointer transition-all duration-300 hover:scale-110 animate-glow"
+        className="group cursor-pointer transition-all duration-300 hover:scale-105"
         onClick={handleClick}
         {...handleMouseEvents}
       >
-                <div className="w-28 sm:w-32 h-28 sm:h-32 rounded-full border-3 sm:border-4 flex flex-col items-center justify-center p-3 sm:p-4 transition-all duration-300 sm:hover:animate-bounce-slow active:scale-95 touch-none sm:touch-auto glow-border shadow-lg"
+                <div className="w-28 sm:w-32 h-28 sm:h-32 rounded-full border-2 flex flex-col items-center justify-center p-3 sm:p-4 transition-all duration-300 hover:scale-105 active:scale-95 touch-none sm:touch-auto group relative overflow-hidden"
              style={{ 
                borderColor: 'var(--accent)',
                backgroundColor: 'var(--bg-secondary)',
@@ -74,7 +74,7 @@ const Badge: React.FC<BadgeProps> = ({ certification }) => {
       {/* Tooltip */}
       {showTooltip && (
         <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 z-20 animate-fadeIn">
-          <div className="bg-opacity-95 backdrop-blur-md rounded-lg p-3 sm:p-4 shadow-xl border-2 max-w-xs w-[250px] sm:w-64 transform transition-all duration-200 ease-in-out animate-fade-in active:scale-95 sm:active:scale-100"
+          <div className="bg-opacity-95 backdrop-blur-md rounded-lg p-3 sm:p-4 shadow-lg border max-w-xs w-[250px] sm:w-64 transform transition-all duration-200 ease-in-out animate-fade-in"
                onClick={(e) => e.stopPropagation()}
                style={{ 
                  backgroundColor: 'var(--bg-primary)',
@@ -93,15 +93,19 @@ const Badge: React.FC<BadgeProps> = ({ certification }) => {
             {certification.link && (
               <button
                 onClick={() => certification.link && window.open(certification.link, '_blank')}
-                className="flex items-center gap-1 mt-3 text-xs px-3 py-2 rounded-md transition-all duration-300 hover:scale-105 w-full justify-center"
+                className="group/btn relative flex items-center gap-2 mt-3 text-xs px-4 py-2 rounded-md transition-all duration-300 hover:scale-102 w-full justify-center overflow-hidden"
                 style={{ 
-                  backgroundColor: isMobile ? 'var(--accent)' : 'transparent',
-                  color: isMobile ? 'var(--bg-primary)' : 'var(--accent)',
-                  border: isMobile ? 'none' : '1px solid var(--accent)'
-                }}
-              >
-                <ExternalLink className="w-3 h-3" />
-                {isMobile ? 'Open Certificate' : 'View Certificate'}
+                  backgroundColor: 'var(--bg-primary)',
+                  color: 'var(--accent)',
+                  border: '1px solid var(--accent)'
+                }}>
+                <div className="absolute inset-0 opacity-0 group-hover/btn:opacity-10 transition-opacity duration-300"
+                     style={{ background: 'linear-gradient(45deg, var(--accent), transparent, var(--accent))' }}></div>
+              
+                <div className="flex items-center gap-2 transition-transform duration-300 group-hover:translate-x-1">
+                  <ExternalLink className="w-3 h-3 transition-transform duration-300 group-hover:rotate-12" />
+                  <span>{isMobile ? 'Open Certificate' : 'View Certificate'}</span>
+                </div>
               </button>
             )}
           </div>

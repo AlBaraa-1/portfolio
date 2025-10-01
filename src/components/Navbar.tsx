@@ -17,21 +17,48 @@ const Navbar: React.FC = () => {
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = navItems.map(item => document.getElementById(item.id));
-      const scrollPosition = window.scrollY + 100;
+    // Use IntersectionObserver for more reliable section visibility detection
+    const observers: IntersectionObserver[] = [];
+    const options: IntersectionObserverInit = {
+      root: null,
+      rootMargin: '-40% 0% -40% 0%', // focus on center area of viewport
+      threshold: 0.01,
+    };
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(navItems[i].id);
-          break;
+  const callback = (entries: any[]) => {
+      // pick the entry that's intersecting and closest to the center (highest intersectionRatio)
+      let bestEntry: any = null;
+      entries.forEach(entry => {
+        if (!bestEntry) {
+          if (entry.isIntersecting) bestEntry = entry;
+        } else if (entry.isIntersecting && entry.intersectionRatio > (bestEntry.intersectionRatio ?? 0)) {
+          bestEntry = entry;
         }
+      });
+
+      if (bestEntry && bestEntry.isIntersecting) {
+        const target = bestEntry.target as HTMLElement | null;
+        if (target && target.id) setActiveSection(target.id);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    navItems.forEach(item => {
+      const el = document.getElementById(item.id);
+      if (el) {
+        const obs = new IntersectionObserver(callback, options);
+        obs.observe(el);
+        observers.push(obs);
+      }
+    });
+
+    // Fallback: set initial section based on scroll position
+    const initial = navItems.slice().reverse().find(it => {
+      const el = document.getElementById(it.id);
+      return el && el.getBoundingClientRect().top <= window.innerHeight / 2;
+    });
+    if (initial) setActiveSection(initial.id);
+
+    return () => observers.forEach(o => o.disconnect());
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -85,6 +112,9 @@ const Navbar: React.FC = () => {
               <ThemeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
+              aria-controls="mobile-menu"
+              aria-expanded={isOpen}
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
               className="p-3 rounded-md transition-all duration-300 hover:bg-opacity-10 hover:bg-current active:scale-95"
               style={{ color: 'var(--text-primary)' }}
             >
@@ -96,8 +126,13 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <div className={`md:hidden backdrop-blur-md border-t border-opacity-30 transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-[32rem] opacity-100' : 'max-h-0 opacity-0'}`} 
-             style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border)' }}>
+      <div
+        id="mobile-menu"
+        role="menu"
+        aria-hidden={!isOpen}
+        className={`md:hidden backdrop-blur-md border-t border-opacity-30 transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-[32rem] opacity-100' : 'max-h-0 opacity-0'}`}
+        style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border)' }}
+      >
           <div className="px-2 pt-2 pb-3 space-y-2 sm:px-3">
             {navItems.map((item) => (
               <button

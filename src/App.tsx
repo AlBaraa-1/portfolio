@@ -1,4 +1,4 @@
-import React from 'react';
+// React import not required with the new JSX transform
 import { ThemeProvider } from './context/ThemeContext';
 import Layout from './components/Layout';
 import Hero from './components/Hero';

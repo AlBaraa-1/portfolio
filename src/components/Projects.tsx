@@ -6,11 +6,19 @@ import { getAllProjectViews, trackProjectView, getProjectViewCount } from '../li
 
 const Projects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<'all' | 'ai-cv' | 'web-dev' | 'other'>('all');
+<<<<<<< HEAD
   const [isVisible, setIsVisible] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [viewCounts, setViewCounts] = useState<Record<string, number>>({});
   const [modalViewCount, setModalViewCount] = useState(0);
+=======
+  const [showElements, setShowElements] = useState({
+    title: false,
+    filters: false,
+    cards: false
+  });
+>>>>>>> 0905cad (major update)
   const sectionRef = useRef<HTMLElement>(null);
 
   const filters = [
@@ -28,7 +36,18 @@ const Projects: React.FC = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          // Staggered animation timeline
+          const timeline = [
+            { element: 'title', delay: 200 },
+            { element: 'filters', delay: 600 },
+            { element: 'cards', delay: 1000 }
+          ];
+
+          timeline.forEach(({ element, delay }) => {
+            setTimeout(() => {
+              setShowElements(prev => ({ ...prev, [element]: true }));
+            }, delay);
+          });
         }
       },
       { threshold: 0.1 }
@@ -72,7 +91,9 @@ const Projects: React.FC = () => {
     <section id="projects" ref={sectionRef} className="py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-700 ${
+          showElements.title ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+        }`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="terminal-prompt" style={{ color: 'var(--accent)' }}>
               Quest Inventory
@@ -84,18 +105,23 @@ const Projects: React.FC = () => {
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12">
-          {filters.map((filter) => (
+        <div className={`flex flex-wrap justify-center gap-2 sm:gap-4 mb-12 transition-all duration-700 ${
+          showElements.filters ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`}>
+          {filters.map((filter, index) => (
             <button
               key={filter.id}
               onClick={() => setActiveFilter(filter.id as any)}
-              className={`px-3 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 hover:scale-105 ${
+              className={`px-3 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-500 hover:scale-105 ${
                 activeFilter === filter.id ? 'glow-border' : ''
               }`}
               style={{
                 backgroundColor: activeFilter === filter.id ? 'var(--accent)' : 'var(--bg-secondary)',
                 color: activeFilter === filter.id ? 'var(--bg-primary)' : 'var(--text-primary)',
-                border: activeFilter === filter.id ? 'none' : `1px solid var(--border)`
+                border: activeFilter === filter.id ? 'none' : `1px solid var(--border)`,
+                transitionDelay: `${index * 100}ms`,
+                opacity: showElements.filters ? 1 : 0,
+                transform: showElements.filters ? 'translateY(0)' : 'translateY(20px)'
               }}
             >
               {filter.label} ({filter.count})
@@ -104,16 +130,17 @@ const Projects: React.FC = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-700 ${
+          showElements.cards ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
           {filteredProjects.map((project, index) => (
             <div
               key={project.id}
-              className="transition-all duration-300"
+              className="transition-all duration-500"
               style={{
-                animationDelay: `${index * 100}ms`,
-                animation: isVisible ? 'fadeInUp 0.6s ease-out forwards' : 'none'
+                transitionDelay: `${index * 150}ms`,
+                opacity: showElements.cards ? 1 : 0,
+                transform: showElements.cards ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)'
               }}
             >
               <ProjectCard

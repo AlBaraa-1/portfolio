@@ -17,6 +17,8 @@ export default {
         'glow': 'glow 2s ease-in-out infinite alternate',
         'bounce-slow': 'bounce 3s infinite',
         'matrix-fall': 'matrix-fall 10s linear infinite',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'shine': 'shine 1.5s ease-in-out infinite',
       },
       keyframes: {
         blink: {

@@ -99,47 +99,89 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails, viewC
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap gap-2 justify-start items-end mt-auto">
+        <div className="grid grid-cols-1 sm:flex sm:flex-wrap gap-2 mt-auto pt-4 border-t" style={{ borderColor: 'var(--border)' }}>
           {project.liveDemo && (
-                          <button
-                onClick={() => window.open(project.liveDemo, '_blank')}
-                className="flex-1 flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-300 hover:scale-105 active:scale-95 min-w-[100px] sm:min-w-[120px]"
-                style={{ 
-                  backgroundColor: 'var(--accent)',
-                  color: 'var(--bg-primary)'
-                }}
-              >
-                <Eye className="w-4 h-4" />
-                Demo
-              </button>
+            <button
+              onClick={() => window.open(project.liveDemo, '_blank')}
+              className="group relative flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium w-full sm:w-auto sm:flex-1 touch-manipulation rounded-md sm:rounded-none shadow-sm sm:shadow-none border border-blue-500/20 sm:border-0 mb-2 sm:mb-0 active:shadow-none transition-all duration-200 hover:sm:shadow-lg hover:sm:-translate-y-0.5 active:scale-[0.98] sm:active:scale-100"
+              style={{
+                backgroundColor: 'var(--bg-secondary)',
+                color: 'var(--text-primary)',
+                WebkitTapHighlightColor: 'transparent'
+              }}
+            >
+              {/* Desktop hover effect */}
+              <div className="absolute inset-0 hidden sm:block">
+                <div className="absolute inset-0 w-2 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 ease-out group-hover:w-full opacity-80"></div>
+              </div>
+              {/* Mobile tap effect */}
+              <div className="absolute inset-0 sm:hidden rounded-md overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 transition-opacity duration-150 ease-out group-active:opacity-20">
+                  <div className="absolute inset-0 animate-pulse-slow mix-blend-overlay"></div>
+                </div>
+              </div>
+              <div className="relative z-10 flex items-center justify-center gap-2">
+                <ExternalLink className="w-4 h-4 transition-all duration-200 sm:group-hover:scale-110 sm:group-hover:rotate-6" />
+                <span className="transition-all duration-200 sm:group-hover:translate-x-0.5">Demo</span>
+              </div>
+            </button>
           )}
           
           {project.github && (
             <button
               onClick={() => window.open(project.github, '_blank')}
-              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium border transition-all duration-300 hover:scale-105 min-w-[100px]"
-              style={{ 
-                borderColor: 'var(--accent)',
-                color: 'var(--accent)',
-                backgroundColor: 'transparent'
+              className="group relative flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium w-full sm:w-auto sm:flex-1 touch-manipulation rounded-md sm:rounded-none shadow-sm sm:shadow-none border border-gray-500/20 sm:border-0 mb-2 sm:mb-0 active:shadow-none transition-all duration-200 hover:sm:shadow-lg hover:sm:-translate-y-0.5 active:scale-[0.98] sm:active:scale-100"
+              style={{
+                backgroundColor: 'var(--bg-secondary)',
+                color: 'var(--text-primary)',
+                WebkitTapHighlightColor: 'transparent'
               }}
             >
-              <Github className="w-4 h-4" />
-              GitHub
+              {/* Desktop hover effect */}
+              <div className="absolute inset-0 hidden sm:block">
+                <div className="absolute inset-0 w-2 bg-gradient-to-r from-gray-500 to-gray-600 transition-all duration-300 ease-out group-hover:w-full opacity-80"></div>
+              </div>
+              {/* Mobile tap effect */}
+              <div className="absolute inset-0 sm:hidden rounded-md overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-gray-500 to-gray-600 opacity-0 transition-opacity duration-150 ease-out group-active:opacity-20">
+                  <div className="absolute inset-0 animate-pulse-slow mix-blend-overlay"></div>
+                </div>
+              </div>
+              <div className="relative z-10 flex items-center justify-center gap-2">
+                <Github className="w-4 h-4 transition-all duration-200 sm:group-hover:scale-110 sm:group-hover:rotate-6" />
+                <span className="transition-all duration-200 sm:group-hover:translate-x-0.5">GitHub</span>
+              </div>
             </button>
           )}
           
           <button
+<<<<<<< HEAD
             onClick={() => onOpenDetails(project)}
             className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium border transition-all duration-300 hover:scale-105 min-w-[100px]"
             style={{
               borderColor: 'var(--border)',
               color: 'var(--text-secondary)',
               backgroundColor: 'transparent'
+=======
+            onClick={() => window.open(`/projects/${project.id}`, '_blank')}
+            className="group relative flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium w-full sm:w-auto sm:flex-1 touch-manipulation rounded-md sm:rounded-none shadow-sm sm:shadow-none border border-green-500/20 sm:border-0 mb-2 sm:mb-0 active:shadow-none transition-all duration-200 hover:sm:shadow-lg hover:sm:-translate-y-0.5 active:scale-[0.98] sm:active:scale-100"
+            style={{
+              backgroundColor: 'var(--bg-secondary)',
+              color: 'var(--text-primary)',
+              WebkitTapHighlightColor: 'transparent'
+>>>>>>> 0905cad (major update)
             }}
           >
-            <ExternalLink className="w-4 h-4" />
-            Details
+            {/* Desktop hover effect */}
+            <div className="absolute inset-0 hidden sm:block">
+              <div className="absolute inset-0 w-2 bg-gradient-to-r from-green-500 to-emerald-600 transition-all duration-300 ease-out group-hover:w-full opacity-80"></div>
+            </div>
+            {/* Mobile tap effect */}
+            <div className="absolute inset-0 sm:hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-600 opacity-0 transition-opacity duration-150 ease-out group-active:opacity-10"></div>
+            </div>
+            <Eye className="w-4 h-4 z-10 transition-transform duration-150 sm:group-hover:scale-110" />
+            <span className="z-10">Details</span>
           </button>
         </div>
       </div>

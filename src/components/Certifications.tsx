@@ -27,13 +27,22 @@ const Certifications: React.FC = () => {
     <section id="certifications" ref={sectionRef} className="py-12 sm:py-16 md:py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
-            <span className="terminal-prompt" style={{ color: 'var(--accent)' }}>
-              Badge Collection
-            </span>
-          </h2>
-          <p className="text-lg sm:text-xl max-w-3xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+        <div className={`text-center mb-8 sm:mb-12 md:mb-16 transition-all duration-1000 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
+        }`}>
+          <div className="inline-flex items-center gap-3 mb-4">
+            <div className="h-px w-8 sm:w-12 transition-all duration-700 delay-500"
+                 style={{ backgroundColor: 'var(--accent)' }}></div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+              <span className="terminal-prompt" style={{ color: 'var(--accent)' }}>
+                Badge Collection
+              </span>
+            </h2>
+            <div className="h-px w-8 sm:w-12 transition-all duration-700 delay-500"
+                 style={{ backgroundColor: 'var(--accent)' }}></div>
+          </div>
+          <p className="text-lg sm:text-xl max-w-3xl mx-auto transition-all duration-700 delay-700"
+             style={{ color: 'var(--text-secondary)' }}>
             Professional certifications and achievements earned through continuous learning and skill development.
           </p>
         </div>
@@ -57,7 +66,7 @@ const Certifications: React.FC = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="mt-8 sm:mt-12 md:mt-16 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+        <div className={`mt-8 sm:mt-12 md:mt-16 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="text-center p-4 sm:p-6 rounded-lg glow-border transition-all duration-300 hover:scale-105"
                style={{ backgroundColor: 'var(--bg-secondary)' }}>
             <div className="text-2xl sm:text-3xl font-bold mb-2" style={{ color: 'var(--accent)' }}>
@@ -114,18 +123,6 @@ const Certifications: React.FC = () => {
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes slideInUp {
-          from {
-            opacity: 0;
-            transform: translateY(50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </section>
   );
 };

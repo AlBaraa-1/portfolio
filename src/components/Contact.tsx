@@ -1,28 +1,61 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Send, Linkedin, Github, Mail, Terminal, CheckCircle } from 'lucide-react';
-import { submitContactForm } from '../lib/supabase';
+import { Send, Linkedin, Github, Mail, Terminal } from 'lucide-react';
+
+import emailjs from '@emailjs/browser';
+
+// EmailJS configuration
+const EMAILJS_SERVICE_ID = 'service_7ih1kvr';
+const EMAILJS_TEMPLATE_ID = 'template_bwjowpe';
+const EMAILJS_PUBLIC_KEY = 'XyP-kutZ_-CJmS3qi';
 
 const Contact: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [showElements, setShowElements] = useState({
+    title: false,
+    description: false,
+    terminal: false,
+    form: false
+  });
+  const [showMessageForm, setShowMessageForm] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
     message: ''
   });
+  const [errors, setErrors] = useState<{
+    name?: string;
+    email?: string;
+    message?: string;
+  }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [terminalOutput, setTerminalOutput] = useState<string[]>([
     '> Terminal initialized...',
-    '> Available commands loaded',
+    '> Type "help" to see all available commands',
     '> Ready for input'
   ]);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    // Initialize EmailJS
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    // Set up intersection observer
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          // Staggered animation timeline
+          const timeline = [
+            { element: 'title', delay: 200 },
+            { element: 'description', delay: 500 },
+            { element: 'terminal', delay: 800 },
+            { element: 'form', delay: 1100 }
+          ];
+
+          timeline.forEach(({ element, delay }) => {
+            setTimeout(() => {
+              setShowElements(prev => ({ ...prev, [element]: true }));
+            }, delay);
+          });
         }
       },
       { threshold: 0.3 }
@@ -58,7 +91,8 @@ const Contact: React.FC = () => {
   connect --linkedin    Open LinkedIn profile
   connect --github     Open GitHub profile
   connect --email      Open email client
-  send-message        Activate contact form
+  show-form           Display contact form
+  hide-form           Hide contact form
   clear               Clear terminal
   help                Show this help message`);
       setTerminalOutput(newOutput);
@@ -86,13 +120,19 @@ const Contact: React.FC = () => {
           newOutput.push('Example: connect --linkedin');
       }
     }
-    // Handle send-message command
-    else if (cmd === 'send-message') {
-      newOutput.push('Message form activated. Please fill out the form below.');
-      const formElement = document.querySelector('input[name="name"]') as HTMLInputElement;
-      if (formElement) {
-        formElement.focus();
-      }
+    // Handle show-form command
+    else if (cmd === 'show-form') {
+      newOutput.push('Opening contact form...');
+      setShowMessageForm(true);
+      setTimeout(() => {
+        const formElement = document.querySelector('input[name="name"]') as HTMLInputElement;
+        if (formElement) {
+          formElement.focus();
+        }
+      }, 500);
+    } else if (cmd === 'hide-form') {
+      newOutput.push('Hiding contact form...');
+      setShowMessageForm(false);
     }
     // Handle unknown commands
     else {
@@ -105,33 +145,72 @@ const Contact: React.FC = () => {
     setTerminalOutput(newOutput);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    const newOutput = [...terminalOutput];
-    newOutput.push('> send-message --submit');
-    newOutput.push('Submitting message...');
-    setTerminalOutput(newOutput);
-
-    const result = await submitContactForm({
-      name: formData.name,
-      email: formData.email,
-      subject: formData.subject,
-      message: formData.message
-    });
-
-    const finalOutput = [...newOutput];
-    if (result.success) {
-      finalOutput.push('Message sent successfully! ✅');
-      finalOutput.push('Thank you for reaching out. I\'ll get back to you soon!');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    } else {
-      finalOutput.push('Error sending message. Please try again or email directly.');
+  const validateForm = () => {
+    const newErrors: { name?: string; email?: string; message?: string } = {};
+    
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
     }
 
-    setTerminalOutput(finalOutput);
-    setIsSubmitting(false);
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!emailRegex.test(formData.email)) {
+      newErrors.email = 'Invalid email format';
+    }
+
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.length < 10) {
+      newErrors.message = 'Message must be at least 10 characters long';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      const newOutput = [...terminalOutput];
+      newOutput.push('> send-message --submit');
+      newOutput.push('❌ Form validation failed. Please check your inputs.');
+      setTerminalOutput(newOutput);
+      return;
+    }
+
+    setIsSubmitting(true);
+    const newOutput = [...terminalOutput];
+    newOutput.push('> send-message --submit');
+    newOutput.push('Sending message...');
+    
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          reply_to: formData.email,
+          message: formData.message,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+      
+      newOutput.push('Message sent successfully! ✅');
+      newOutput.push('Thank you for reaching out. I\'ll get back to you soon!');
+      setFormData({ name: '', email: '', message: '' });
+      setErrors({});
+    } catch (error) {
+      console.error('Error sending message:', error);
+      newOutput.push('❌ Failed to send message. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+      setTerminalOutput(newOutput);
+    }
   };
 
   return (
@@ -139,21 +218,25 @@ const Contact: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className={`text-4xl md:text-5xl font-bold mb-4 transition-all duration-700 ${
+            showElements.title ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+          }`}>
             <span className="terminal-prompt" style={{ color: 'var(--accent)' }}>
               Terminal Interface
             </span>
           </h2>
-          <p className="text-xl max-w-3xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+          <p className={`text-xl max-w-3xl mx-auto transition-all duration-700 delay-200 ${
+            showElements.description ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          }`} style={{ color: 'var(--text-secondary)' }}>
             Execute commands to connect with me or send a message through the terminal.
           </p>
         </div>
 
-        <div className={`grid lg:grid-cols-2 gap-12 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
+        <div className="grid lg:grid-cols-2 gap-8 relative items-start">
           {/* Terminal Interface */}
-          <div className="code-block">
+          <div className={`code-block transition-all duration-700 ${
+            showElements.terminal ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+          } ${!showMessageForm ? 'lg:col-span-2 lg:max-w-xl lg:mx-auto w-full' : 'lg:max-w-full'}`}>
             {/* Terminal Header */}
             <div className="flex items-center gap-2 mb-6 pb-4 border-b border-opacity-30" 
                  style={{ borderColor: 'var(--border)' }}>
@@ -164,19 +247,6 @@ const Contact: React.FC = () => {
               <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>
                 contact_terminal
               </span>
-            </div>
-
-            {/* Available Commands */}
-            <div className="mb-6">
-              <div className="terminal-prompt mb-2" style={{ color: 'var(--accent)' }}>
-                Available Commands:
-              </div>
-              <div className="space-y-1 text-sm ml-4" style={{ color: 'var(--text-secondary)' }}>
-                <div>connect --linkedin    [Opens LinkedIn profile]</div>
-                <div>connect --github      [Opens GitHub profile]</div>
-                <div>connect --email       [Opens email client]</div>
-                <div>send-message         [Contact form]</div>
-              </div>
             </div>
 
             {/* Quick Action Buttons */}
@@ -221,7 +291,7 @@ const Contact: React.FC = () => {
               </button>
               
               <button
-                onClick={() => handleCommand('send-message')}
+                onClick={() => handleCommand(showMessageForm ? 'hide-form' : 'show-form')}
                 className="flex items-center gap-2 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
                 style={{ 
                   backgroundColor: 'var(--accent)',
@@ -229,12 +299,19 @@ const Contact: React.FC = () => {
                 }}
               >
                 <Send className="w-4 h-4" />
-                Message
+                {showMessageForm ? 'Hide Form' : 'Show Form'}
               </button>
             </div>
 
+            {/* Command Hint */}
+            <div className="mb-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
+              Try: <span style={{ color: 'var(--accent)' }}>connect --linkedin</span>, <span style={{ color: 'var(--accent)' }}>show-form</span>, <span style={{ color: 'var(--accent)' }}>help</span>
+            </div>
+
             {/* Terminal Output */}
-            <div className="bg-black bg-opacity-50 rounded-lg p-4 h-48 overflow-y-auto font-mono text-sm">
+            <div className={`bg-black bg-opacity-50 rounded-lg p-4 overflow-y-auto font-mono text-sm transition-all duration-700 ${
+              !showMessageForm ? 'h-[200px]' : 'h-[calc(100vh*0.3)] max-h-[300px] min-h-[200px]'
+            }`}>
               <div className="h-full flex flex-col">
                 <div 
                   className="flex-1 overflow-y-auto scroll-smooth"
@@ -249,7 +326,15 @@ const Contact: React.FC = () => {
                   }}
                 >
                   {terminalOutput.map((line, index) => (
-                    <div key={index} className="mb-1" style={{ color: 'var(--terminal-green)' }}>
+                    <div 
+                      key={index} 
+                      className="mb-1" 
+                      style={{ 
+                        color: line.startsWith('> ') && !line.startsWith('> Terminal') && !line.startsWith('> Type') && !line.startsWith('> Ready') 
+                          ? 'var(--accent)' 
+                          : 'var(--terminal-green)' 
+                      }}
+                    >
                       {line}
                     </div>
                   ))}
@@ -282,7 +367,9 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="code-block">
+          <div className={`code-block transition-all duration-700 ${
+            showMessageForm ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8 hidden'
+          }`}>
             <div className="flex items-center gap-2 mb-6 pb-4 border-b border-opacity-30" 
                  style={{ borderColor: 'var(--border)' }}>
               <Send className="w-4 h-4" style={{ color: 'var(--accent)' }} />
@@ -302,15 +389,20 @@ const Contact: React.FC = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border bg-transparent transition-all duration-300 focus:outline-none focus:ring-2"
+                  disabled={isSubmitting}
+                  className={`w-full px-4 py-3 rounded-lg border bg-transparent transition-all duration-300 focus:outline-none focus:ring-2 ${
+                    errors.name ? 'border-red-500' : ''
+                  }`}
                   style={{ 
-                    borderColor: 'var(--border)',
+                    borderColor: errors.name ? 'rgb(239, 68, 68)' : 'var(--border)',
                     color: 'var(--text-primary)',
                     backgroundColor: 'var(--bg-primary)'
                   }}
                   placeholder="Enter your name"
                 />
+                {errors.name && (
+                  <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+                )}
               </div>
 
               <div>
@@ -323,35 +415,20 @@ const Contact: React.FC = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border bg-transparent transition-all duration-300 focus:outline-none focus:ring-2"
-                  style={{
-                    borderColor: 'var(--border)',
+                  disabled={isSubmitting}
+                  className={`w-full px-4 py-3 rounded-lg border bg-transparent transition-all duration-300 focus:outline-none focus:ring-2 ${
+                    errors.email ? 'border-red-500' : ''
+                  }`}
+                  style={{ 
+                    borderColor: errors.email ? 'rgb(239, 68, 68)' : 'var(--border)',
                     color: 'var(--text-primary)',
                     backgroundColor: 'var(--bg-primary)'
                   }}
                   placeholder="Enter your email"
                 />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2 terminal-prompt"
-                       style={{ color: 'var(--accent)' }}>
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border bg-transparent transition-all duration-300 focus:outline-none focus:ring-2"
-                  style={{
-                    borderColor: 'var(--border)',
-                    color: 'var(--text-primary)',
-                    backgroundColor: 'var(--bg-primary)'
-                  }}
-                  placeholder="Subject (optional)"
-                />
+                {errors.email && (
+                  <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                )}
               </div>
 
               <div>
@@ -363,39 +440,38 @@ const Contact: React.FC = () => {
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}
-                  required
+                  disabled={isSubmitting}
                   rows={5}
-                  className="w-full px-4 py-3 rounded-lg border bg-transparent transition-all duration-300 focus:outline-none focus:ring-2 resize-none"
+                  className={`w-full px-4 py-3 rounded-lg border bg-transparent transition-all duration-300 focus:outline-none focus:ring-2 resize-none ${
+                    errors.message ? 'border-red-500' : ''
+                  }`}
                   style={{ 
-                    borderColor: 'var(--border)',
+                    borderColor: errors.message ? 'rgb(239, 68, 68)' : 'var(--border)',
                     color: 'var(--text-primary)',
                     backgroundColor: 'var(--bg-primary)'
                   }}
                   placeholder="Enter your message"
                 />
+                {errors.message && (
+                  <p className="mt-1 text-sm text-red-500">{errors.message}</p>
+                )}
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-lg font-semibold text-lg border-2 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{
+                className={`w-full flex items-center justify-center gap-3 px-6 py-4 rounded-lg font-semibold text-lg border-2 transition-all duration-300 ${
+                  isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'
+                }`}
+                style={{ 
                   borderColor: 'var(--accent)',
                   color: 'var(--accent)',
                   backgroundColor: 'transparent'
                 }}
               >
-                {isSubmitting ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                    <span>Sending...</span>
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-5 h-5" />
-                    <span>&gt;</span> Submit Message
-                  </>
-                )}
+                <Send className={`w-5 h-5 ${isSubmitting ? 'animate-pulse' : ''}`} />
+                <span>&gt;</span>
+                {isSubmitting ? 'Sending...' : 'Submit Message'}
               </button>
             </form>
           </div>

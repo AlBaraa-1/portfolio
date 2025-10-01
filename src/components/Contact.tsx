@@ -19,7 +19,6 @@ const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
     message: ''
   });
   const [errors, setErrors] = useState<{
@@ -406,7 +405,7 @@ const Contact: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2 terminal-prompt"
+                <label className="block text-sm font-medium mb-2 terminal-prompt" 
                        style={{ color: 'var(--accent)' }}>
                   Email
                 </label>

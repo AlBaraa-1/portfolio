@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ExternalLink, Github, Eye, TrendingUp } from 'lucide-react';
+import { ExternalLink, Github, Eye } from 'lucide-react';
 import { Project } from '../data/portfolioData';
 
 interface ProjectCardProps {
   project: Project;
-  onOpenDetails: (project: Project) => void;
-  viewCount?: number;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails, viewCount = 0 }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const [isInView, setIsInView] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -54,15 +52,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails, viewC
           <div className="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-semibold animate-glow"
                style={{ backgroundColor: 'var(--accent)', color: 'var(--bg-primary)' }}>
             ⭐ Featured
-          </div>
-        )}
-
-        {/* View Count Badge */}
-        {viewCount > 0 && (
-          <div className="absolute top-3 left-3 px-2 py-1 rounded-full text-xs font-semibold flex items-center gap-1"
-               style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)', color: 'white' }}>
-            <TrendingUp className="w-3 h-3" />
-            {viewCount} views
           </div>
         )}
       </div>
@@ -155,7 +144,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails, viewC
           )}
           
           <button
-            onClick={() => onOpenDetails(project)}
+            onClick={() => window.open(`/projects/${project.id}`, '_blank')}
             className="group relative flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium w-full sm:w-auto sm:flex-1 touch-manipulation rounded-md sm:rounded-none shadow-sm sm:shadow-none border border-green-500/20 sm:border-0 mb-2 sm:mb-0 active:shadow-none transition-all duration-200 hover:sm:shadow-lg hover:sm:-translate-y-0.5 active:scale-[0.98] sm:active:scale-100"
             style={{
               backgroundColor: 'var(--bg-secondary)',

@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 backdrop-blur-md border-b border-opacity-30 animate-slide-down"
+    <nav className="fixed top-0 left-0 right-0 z-40 backdrop-blur-md border-b border-opacity-30" 
          style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">

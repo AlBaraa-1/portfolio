@@ -155,21 +155,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails, viewC
           )}
           
           <button
-<<<<<<< HEAD
             onClick={() => onOpenDetails(project)}
-            className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium border transition-all duration-300 hover:scale-105 min-w-[100px]"
-            style={{
-              borderColor: 'var(--border)',
-              color: 'var(--text-secondary)',
-              backgroundColor: 'transparent'
-=======
-            onClick={() => window.open(`/projects/${project.id}`, '_blank')}
             className="group relative flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium w-full sm:w-auto sm:flex-1 touch-manipulation rounded-md sm:rounded-none shadow-sm sm:shadow-none border border-green-500/20 sm:border-0 mb-2 sm:mb-0 active:shadow-none transition-all duration-200 hover:sm:shadow-lg hover:sm:-translate-y-0.5 active:scale-[0.98] sm:active:scale-100"
             style={{
               backgroundColor: 'var(--bg-secondary)',
               color: 'var(--text-primary)',
               WebkitTapHighlightColor: 'transparent'
->>>>>>> 0905cad (major update)
             }}
           >
             {/* Desktop hover effect */}

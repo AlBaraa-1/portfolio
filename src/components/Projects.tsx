@@ -6,19 +6,15 @@ import { getAllProjectViews, trackProjectView, getProjectViewCount } from '../li
 
 const Projects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<'all' | 'ai-cv' | 'web-dev' | 'other'>('all');
-<<<<<<< HEAD
-  const [isVisible, setIsVisible] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [viewCounts, setViewCounts] = useState<Record<string, number>>({});
-  const [modalViewCount, setModalViewCount] = useState(0);
-=======
   const [showElements, setShowElements] = useState({
     title: false,
     filters: false,
     cards: false
   });
->>>>>>> 0905cad (major update)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [viewCounts, setViewCounts] = useState<Record<string, number>>({});
+  const [modalViewCount, setModalViewCount] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
   const filters = [

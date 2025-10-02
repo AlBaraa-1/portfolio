@@ -13,20 +13,23 @@ const About: React.FC = () => {
 
   const codeContent = `{
   "role": "Computer Vision Explorer",
-  "specialization": "AI & Machine Learning",
   "location": "United Arab Emirates",
+  "education": {
+    "degree": "BSc in Computer Science",
+    "university": "Al Ain University",
+  },
   "mainSkills": [
-    "Computer Vision",
-    "Deep Learning",
     "Python",
-    "TensorFlow"
+    "Computer Vision",
+    "TensorFlow, PyTorch, OpenCV",
+    "Natural Language Processing",
+    "Git & GitHub"
   ],
   "achievements": [
     "Published Researcher",
-    "AI Innovator",
-    "CS50x Graduate"
+    "CS50x & CS50P Graduate"
   ],
-  "currentQuest": "Building intelligent systems that see the world"
+  "currentQuest": "Seeking Computer Vision internship opportunities"
 }`;
 
   useEffect(() => {

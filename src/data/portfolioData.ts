@@ -46,7 +46,7 @@ export const projects: Project[] = [
     description: 'Developed a real-time face detection and recognition system using Python, OpenCV, and the face_recognition library. CS50x Final Project demonstrating practical application of computer vision.',
     category: 'ai-cv',
     skills: ['Python', 'OpenCV', 'face_recognition', 'Computer Vision'],
-    image: 'https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/assets/images/face-recognition.jpg',
     github: 'https://github.com/AlBaraa-1/cs50x-2024-projects/tree/main/Final%20Project',
     featured: true,
     detailedDescription: 'A comprehensive face recognition system that combines real-time face detection with accurate recognition capabilities. This project showcases the practical implementation of computer vision techniques in a real-world application.',
@@ -101,7 +101,7 @@ export const projects: Project[] = [
     category: 'ai-cv',
     skills: ['Python', 'OpenCV', 'NumPy', 'Computer Vision', 'Real-time Processing', 'HSV Color Space'],
     image: '/assets/images/color-detection.png',
-    github: 'https://github.com/AlBaraa-1/Computer-vision/tree/main/color_detection',
+    github: 'https://github.com/AlBaraa-1/Color-Detection',
     featured: true
   }
 ];
@@ -126,23 +126,96 @@ export const certifications: Certification[] = [
     link: 'https://drive.google.com/file/d/1xibJ02x-gbo93fApiQqpZKWukALjh-Oh/view?usp=sharing'
   },
   {
-    id: 'samsung-ai',
-    title: 'Samsung Innovation Campus AI Course',
-    issuer: 'Samsung',
-    date: 'In Progress',
-    description: 'Artificial Intelligence and Machine Learning fundamentals (Currently Pursuing)',
-    icon: '🤖',
-    link: 'https://samsung.com/certificates/albara'
+  id: 'samsung-innovation',
+  title: 'Samsung Innovation Campus AI Course',
+  issuer: 'Samsung',
+  date: 'Currently Attending',
+  description: 'Artificial Intelligence and Machine Learning fundamentals program',
+  icon: '📱',
+  link: '#'
   },
   {
-    id: 'computer-vision',
-    title: 'Computer Vision Specialization',
-    issuer: 'Coursera',
+    id: 'intro-ai-2023',
+    title: 'Introduction to Artificial Intelligence (2023)',
+    issuer: 'LinkedIn Learning',
     date: '2023',
-    description: 'Advanced computer vision techniques and applications',
-    icon: '👁️',
-    link: 'https://coursera.org/certificates/albara'
+    description: 'Comprehensive introduction to AI concepts and applications',
+    icon: '🎯',
+    link: '#'
+  },
+  {
+    id: 'ai-thinking-machines',
+    title: 'AI Foundations: Thinking Machines',
+    issuer: 'LinkedIn Learning',
+    date: '2023',
+    description: 'Foundational concepts in artificial intelligence and machine learning',
+    icon: '🧠',
+    link: '#'
+  },
+  {
+    id: 'generative-ai',
+    title: 'What is Generative AI?',
+    issuer: 'LinkedIn Learning',
+    date: '2024',
+    description: 'Understanding generative artificial intelligence technologies',
+    icon: '⚡',
+    link: '#'
+  },
+  {
+    id: 'ai-machine-learning',
+    title: 'AI Foundations: Machine Learning',
+    issuer: 'LinkedIn Learning',
+    date: '2023',
+    description: 'Machine learning algorithms and practical applications',
+    icon: '🔬',
+    link: '#'
+  },
+  {
+    id: 'prompt-engineering',
+    title: 'Prompt Engineering with ChatGPT!',
+    issuer: 'LinkedIn Learning',
+    date: '2024',
+    description: 'Advanced techniques for effective AI prompt design and optimization',
+    icon: '💡',
+    link: '#'
+  },
+  {
+    id: 'git-github',
+    title: 'Learning Git and GitHub',
+    issuer: 'LinkedIn Learning',
+    date: '2024',
+    description: 'Version control and collaborative development with Git and GitHub',
+    icon: '🔧',
+    link: '#'
+  },
+  {
+    id: 'say-no-guilt',
+    title: 'How to Say No Without Guilt',
+    issuer: 'LinkedIn Learning',
+    date: '2024',
+    description: 'Professional communication and boundary setting skills',
+    icon: '💬',
+    link: '#'
+  },
+  {
+    id: 'sql-w3schools',
+    title: 'SQL',
+    issuer: 'W3Schools',
+    date: '2024',
+    description: 'Database management and SQL query fundamentals',
+    icon: '🗄️',
+    link: '#'
+  },
+  {
+  id: 'creative-thinking',
+  title: 'Solve Problems with Creative & Critical Thinking',
+  issuer: 'edX',
+  date: '2024',
+  description: 'Problem-solving methodologies and critical thinking skills',
+  icon: '🧠',
+  link: '#'
   }
+  
 ];
 
 export const research: Research[] = [

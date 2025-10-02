@@ -89,7 +89,7 @@ const About: React.FC = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="min-h-screen flex items-center justify-center py-10 sm:py-20"
+      className="relative min-h-screen flex items-center justify-center py-10 sm:py-20"
       style={{ scrollMarginTop: '4rem' }}
     >
       <div className="w-full max-w-4xl mx-auto px-4 sm:px-6">
@@ -142,6 +142,34 @@ const About: React.FC = () => {
             </span>
           </p>
         </div>
+
+        {/* Spacing for arrow */}
+        <div className="mt-16"></div>
+
+        {/* Scroll Indicator - Arrow to Projects */}
+        <button
+          onClick={() => {
+            const projectsSection = document.getElementById('projects');
+            if (projectsSection) {
+              projectsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          aria-label="Scroll to projects"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center justify-center p-2 rounded-full bg-transparent hover:bg-[rgba(255,255,255,0.03)] transition-colors duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="36"
+            height="36"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="text-[var(--accent)] animate-bounce"
+            aria-hidden="true"
+          >
+            <path d="M12 5v14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M19 12l-7 7-7-7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
       </div>
     </section>
   );

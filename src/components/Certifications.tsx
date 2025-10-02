@@ -24,7 +24,7 @@ const Certifications: React.FC = () => {
   }, []);
 
   return (
-    <section id="certifications" ref={sectionRef} className="py-12 sm:py-16 md:py-20">
+    <section id="certifications" ref={sectionRef} className="relative py-12 sm:py-16 md:py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className={`text-center mb-8 sm:mb-12 md:mb-16 transition-all duration-1000 ${
@@ -110,19 +110,38 @@ const Certifications: React.FC = () => {
 
         {/* Call to Action */}
         <div className="text-center mt-16">
-          <p className="text-lg mb-4" style={{ color: 'var(--text-secondary)' }}>
+          <p className="text-lg mb-20" style={{ color: 'var(--text-secondary)' }}>
             <span className="terminal-prompt" style={{ color: 'var(--accent)' }}>
               Always learning, always growing
             </span>
           </p>
-          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-dashed transition-all duration-300 hover:scale-105"
-               style={{ borderColor: 'var(--accent)' }}>
-            <span className="text-2xl">📚</span>
-            <span style={{ color: 'var(--text-primary)' }}>More certifications in progress...</span>
-          </div>
         </div>
       </div>
 
+      {/* Scroll Indicator - Arrow to Resume */}
+      <button
+        onClick={() => {
+          const resumeSection = document.getElementById('resume');
+          if (resumeSection) {
+            resumeSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
+        aria-label="Scroll to resume"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center justify-center p-2 rounded-full bg-transparent hover:bg-[rgba(255,255,255,0.03)] transition-colors duration-200"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="36"
+          height="36"
+          viewBox="0 0 24 24"
+          fill="none"
+          className="text-[var(--accent)] animate-bounce"
+          aria-hidden="true"
+        >
+          <path d="M12 5v14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M19 12l-7 7-7-7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
     </section>
   );
 };

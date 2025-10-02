@@ -65,7 +65,7 @@ const Resume: React.FC = () => {
   };
 
   return (
-    <section id="resume" ref={sectionRef} className="py-12 sm:py-16 md:py-20">
+    <section id="resume" ref={sectionRef} className="relative py-12 sm:py-16 md:py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
@@ -174,6 +174,34 @@ const Resume: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Spacing for arrow */}
+      <div className="mt-16"></div>
+
+      {/* Scroll Indicator - Arrow to Contact */}
+      <button
+        onClick={() => {
+          const contactSection = document.getElementById('contact');
+          if (contactSection) {
+            contactSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
+        aria-label="Scroll to contact"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center justify-center p-2 rounded-full bg-transparent hover:bg-[rgba(255,255,255,0.03)] transition-colors duration-200"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="36"
+          height="36"
+          viewBox="0 0 24 24"
+          fill="none"
+          className="text-[var(--accent)] animate-bounce"
+          aria-hidden="true"
+        >
+          <path d="M12 5v14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M19 12l-7 7-7-7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
     </section>
   );
 };

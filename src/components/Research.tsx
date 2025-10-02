@@ -28,7 +28,7 @@ const Research: React.FC = () => {
     <section 
       id="research" 
       ref={sectionRef} 
-      className="py-12 sm:py-16 md:py-20 overflow-hidden"
+      className="relative py-12 sm:py-16 md:py-20 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -241,53 +241,38 @@ const Research: React.FC = () => {
         </div>
 
         {/* Future Research Section */}
-        <div className={`mt-16 text-center transition-all duration-1000 delay-700
+        <div className={`mt-8 text-center transition-all duration-1000 delay-700
           ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div 
-            className="group inline-block p-8 rounded-xl border-2 border-dashed transition-all duration-500 hover:scale-105 relative overflow-hidden"
-            style={{ borderColor: 'var(--accent)' }}
-          >
-            {/* Background glow effect */}
-            <div 
-              className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500"
-              style={{ 
-                background: 'radial-gradient(circle at center, var(--accent), transparent 70%)'
-              }}
-            ></div>
-            
-            {/* Content */}
-            <div className="relative z-10">
-              <div className="text-4xl mb-4 transform transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12">
-                <span role="img" aria-label="rocket">🚀</span>
-              </div>
-              <h3 
-                className="text-xl font-bold mb-2 transition-all duration-500 group-hover:text-2xl"
-                style={{ color: 'var(--text-primary)' }}
-              >
-                More Research Coming Soon
-              </h3>
-              <p 
-                className="transition-all duration-500 group-hover:opacity-80"
-                style={{ color: 'var(--text-secondary)' }}
-              >
-                Currently working on exciting new projects in computer vision and AI
-              </p>
-            </div>
-
-            {/* Animated particles */}
-            <div className="absolute inset-0">
-              <div className="absolute top-4 left-4 w-2 h-2 rounded-full animate-ping"
-                   style={{ backgroundColor: 'var(--accent)', animationDelay: '0s' }}></div>
-              <div className="absolute bottom-4 right-4 w-2 h-2 rounded-full animate-ping"
-                   style={{ backgroundColor: 'var(--accent)', animationDelay: '0.5s' }}></div>
-              <div className="absolute top-4 right-4 w-2 h-2 rounded-full animate-ping"
-                   style={{ backgroundColor: 'var(--accent)', animationDelay: '1s' }}></div>
-              <div className="absolute bottom-4 left-4 w-2 h-2 rounded-full animate-ping"
-                   style={{ backgroundColor: 'var(--accent)', animationDelay: '1.5s' }}></div>
-            </div>
-          </div>
+          <p className="text-sm mb-20" style={{ color: 'var(--text-secondary)' }}>
+            🚀 More research coming soon...
+          </p>
         </div>
       </div>
+
+      {/* Scroll Indicator - Arrow to Certifications */}
+      <button
+        onClick={() => {
+          const certificationsSection = document.getElementById('certifications');
+          if (certificationsSection) {
+            certificationsSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
+        aria-label="Scroll to certifications"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center justify-center p-2 rounded-full bg-transparent hover:bg-[rgba(255,255,255,0.03)] transition-colors duration-200"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="36"
+          height="36"
+          viewBox="0 0 24 24"
+          fill="none"
+          className="text-[var(--accent)] animate-bounce"
+          aria-hidden="true"
+        >
+          <path d="M12 5v14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M19 12l-7 7-7-7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
     </section>
   );
 };

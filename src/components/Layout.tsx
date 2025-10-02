@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import CodeRainBackground from './CodeRainBackground';
+import ScrollProgressBar from './ScrollProgressBar';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -60,6 +61,7 @@ Email: 666645@gmail.com
   return (
     <div className="min-h-screen relative">
       <CodeRainBackground />
+      <ScrollProgressBar />
       <Navbar />
       <main className="relative z-10">
         {children}

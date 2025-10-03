@@ -142,7 +142,7 @@ const Badge: React.FC<BadgeProps> = ({ certification }) => {
       {/* Tooltip */}
       {showTooltip && (
         <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 z-20 animate-fadeIn">
-          <div className={`bg-opacity-95 backdrop-blur-sm rounded-lg p-3 sm:p-4 shadow-lg border max-w-xs w-[250px] sm:w-64 transform transition-all duration-100 ease-out animate-fade-in ring-2 ring-opacity-50 ${
+          <div className={`bg-opacity-95 backdrop-blur-md rounded-lg p-3 sm:p-4 shadow-lg border max-w-xs w-[250px] sm:w-64 transform transition-all duration-100 ease-out animate-fade-in ring-2 ring-opacity-50 ${
             certification.featured ? 'ring-yellow-400' : 'ring-[var(--accent)]'
           }`}
                onClick={(e) => e.stopPropagation()}

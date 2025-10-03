@@ -47,23 +47,59 @@ const Certifications: React.FC = () => {
           </p>
         </div>
 
-        {/* Badges Grid */}
-        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 justify-items-center transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
-          {certifications.map((cert, index) => (
-            <div
-              key={cert.id}
-              className="transition-all duration-300"
-              style={{
-                animationDelay: `${index * 150}ms`,
-                animation: isVisible ? 'slideInUp 0.6s ease-out forwards' : 'none'
-              }}
-            >
-              <Badge certification={cert} />
+        {/* Featured Certifications Section */}
+        {certifications.some(cert => cert.featured) && (
+          <div className={`mb-12 transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
+            <h3 className="text-xl sm:text-2xl font-bold text-center mb-8" style={{ color: 'var(--accent)' }}>
+              ⭐ Featured Achievements
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">
+              {certifications
+                .filter(cert => cert.featured)
+                .map((cert, index) => (
+                  <div
+                    key={cert.id}
+                    className="transition-all duration-300"
+                    style={{
+                      animationDelay: `${index * 150}ms`,
+                      animation: isVisible ? 'slideInUp 0.6s ease-out forwards' : 'none'
+                    }}
+                  >
+                    <Badge certification={cert} />
+                  </div>
+                ))}
             </div>
-          ))}
-        </div>
+          </div>
+        )}
+
+        {/* Other Certifications */}
+        {certifications.some(cert => !cert.featured) && (
+          <div className={`transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
+            <h3 className="text-xl sm:text-2xl font-bold text-center mb-8" style={{ color: 'var(--text-primary)' }}>
+              Additional Certifications
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 justify-items-center">
+              {certifications
+                .filter(cert => !cert.featured)
+                .map((cert, index) => (
+                  <div
+                    key={cert.id}
+                    className="transition-all duration-300"
+                    style={{
+                      animationDelay: `${index * 150}ms`,
+                      animation: isVisible ? 'slideInUp 0.6s ease-out forwards' : 'none'
+                    }}
+                  >
+                    <Badge certification={cert} />
+                  </div>
+                ))}
+            </div>
+          </div>
+        )}
 
         {/* Stats Section */}
         <div className={`mt-8 sm:mt-12 md:mt-16 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>

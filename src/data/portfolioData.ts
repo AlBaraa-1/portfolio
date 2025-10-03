@@ -28,6 +28,7 @@ export interface Certification {
   description: string;
   icon: string;
   link?: string;
+  featured?: boolean;
 }
 
 export interface Research {
@@ -114,7 +115,8 @@ export const certifications: Certification[] = [
     date: '2024',
     description: 'Comprehensive introduction to computer science and programming',
     icon: '🎓',
-    link: 'https://drive.google.com/file/d/1Zt7eW_svaZ7Z-8kulvW4DFfonvnhtioF/view?usp=sharing'
+    link: 'https://drive.google.com/file/d/1Zt7eW_svaZ7Z-8kulvW4DFfonvnhtioF/view?usp=sharing',
+    featured: true
   },
   {
     id: 'cs50p',
@@ -123,16 +125,18 @@ export const certifications: Certification[] = [
     date: '2024',
     description: 'Advanced Python programming concepts and applications',
     icon: '🐍',
-    link: 'https://drive.google.com/file/d/1xibJ02x-gbo93fApiQqpZKWukALjh-Oh/view?usp=sharing'
+    link: 'https://drive.google.com/file/d/1xibJ02x-gbo93fApiQqpZKWukALjh-Oh/view?usp=sharing',
+    featured: true
   },
   {
-  id: 'samsung-innovation',
-  title: 'Samsung Innovation Campus AI Course',
-  issuer: 'Samsung',
-  date: 'Currently Attending',
-  description: 'Artificial Intelligence and Machine Learning fundamentals program',
-  icon: '📱',
-  link: '#'
+    id: 'samsung-innovation',
+    title: 'Samsung Innovation Campus AI Course',
+    issuer: 'Samsung',
+    date: 'Currently Attending',
+    description: 'Artificial Intelligence and Machine Learning fundamentals program',
+    icon: '🏫',
+    link: '#',
+    featured: true
   },
   {
     id: 'intro-ai-2023',

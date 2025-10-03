@@ -29,7 +29,7 @@ const About: React.FC = () => {
     "Published Researcher",
     "CS50x & CS50P Graduate"
   ],
-  "currentQuest": "Seeking Computer Vision internship opportunities"
+  "currentQuest": "I build intelligent systems that see the world"
 }`;
 
   useEffect(() => {

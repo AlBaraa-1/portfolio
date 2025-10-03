@@ -52,7 +52,7 @@ const Certifications: React.FC = () => {
           <div className={`mb-12 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
-            <h3 className="text-xl sm:text-2xl font-bold text-center mb-8" style={{ color: 'var(--accent)' }}>
+            <h3 className="text-xl sm:text-2xl font-bold text-center mb-8" style={{ color: '#fbbf24' }}>
               ⭐ Featured Achievements
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">

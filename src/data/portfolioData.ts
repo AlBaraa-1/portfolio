@@ -49,76 +49,109 @@ export interface Research {
 export const projects: Project[] = [
   {
     id: 'face-recognition',
-    title: 'Face Recognition System',
-    description: 'Developed a real-time face detection and recognition system using Python, OpenCV, and the face_recognition library. CS50x Final Project demonstrating practical application of computer vision.',
+    title: 'Real-Time Face Recognition System',
+    description: '🎯 A Python-based real-time face detection and identification system that uses computer vision to recognize faces from a webcam feed. The system compares detected faces against a database of known individuals and provides instant visual feedback with green boxes for recognized faces and red boxes for unknown ones.',
     category: 'ai-cv',
-    skills: ['Python', 'OpenCV', 'face_recognition', 'Computer Vision'],
+    skills: ['Python', 'OpenCV', 'face_recognition', 'DeepFace', 'NumPy', 'Gradio'],
     image: '/assets/images/face-recognition.png',
-    github: 'https://github.com/AlBaraa-1/cs50x-2024-projects/tree/main/Final%20Project',
+    github: 'https://github.com/AlBaraa-1/Computer-vision/tree/main/face_recognition',
     featured: true,
-    detailedDescription: 'A comprehensive face recognition system that combines real-time face detection with accurate recognition capabilities. This project showcases the practical implementation of computer vision techniques in a real-world application.',
+    detailedDescription: '🔍 A comprehensive real-time face recognition system that processes live video feeds to detect and identify faces instantly. Features optimized performance through frame resizing, easy folder-based image management, and robust visual feedback system with color-coded recognition results.',
     challenges: [
-      'Implementing efficient real-time face detection with minimal latency',
-      'Handling varying lighting conditions and face angles',
-      'Optimizing the recognition algorithm for accuracy',
-      'Managing multiple face detections simultaneously'
+      'Implementing real-time face detection with minimal processing latency',
+      'Managing multiple camera configurations and device compatibility',
+      'Handling varying lighting conditions for consistent recognition accuracy',
+      'Optimizing performance while maintaining recognition quality',
+      'Creating an intuitive setup process for reference images'
     ],
     solutions: [
-      'Utilized OpenCV\'s optimized detection algorithms for real-time processing',
-      'Implemented adaptive threshold techniques for different lighting conditions',
-      'Used face_recognition library with optimized parameters for better accuracy',
-      'Created a queue-based system for handling multiple detections'
+      'Used frame resizing to 25% for faster processing while maintaining accuracy',
+      'Implemented configurable camera index system for multi-camera setups',
+      'Applied adaptive lighting techniques and clear image requirements',
+      'Utilized OpenCV optimization and face_recognition library efficiency',
+      'Created simple folder-based system with filename-to-name mapping'
     ],
     outcomes: [
-      'Achieved 95% accuracy in face recognition under normal conditions',
-      'Real-time processing with less than 100ms latency',
-      'Successfully handles multiple faces simultaneously',
-      'Robust performance in varying lighting conditions'
+      'Real-time face detection and recognition from live webcam feed',
+      'Instant visual feedback with color-coded recognition results',
+      'Easy setup with drag-and-drop reference image management',
+      'Cross-platform compatibility (Windows/macOS/Linux)',
+      'Optimized performance for smooth real-time operation'
     ],
     techStack: {
-      frontend: ['OpenCV GUI', 'Tkinter'],
-      backend: ['Python', 'SQLite'],
-      ai: ['face_recognition', 'dlib', 'OpenCV', 'NumPy']
+      frontend: ['OpenCV GUI', 'Live Video Display'],
+      backend: ['Python', 'File-based Image Storage'],
+      ai: ['face_recognition', 'DeepFace', 'OpenCV', 'NumPy'],
+      other: ['Gradio (Web Interface)', 'Multi-format Image Support']
     },
     gameDetails: {
-      questOverview: "🎯 Quest Complete! Engineered an AI-powered surveillance system that identifies faces in real-time with 95% accuracy, processing multiple targets simultaneously like a digital security guardian.",
+      questOverview: "🎯 Epic Quest Complete! Built a real-time facial recognition guardian that instantly identifies friend from foe using advanced computer vision magic. Green auras mark allies, red warnings signal unknowns - like having digital eyes that never forget a face!",
       skillsUnlocked: [
-        "🧠 Computer Vision Mastery - Unlocked advanced OpenCV techniques",
-        "⚡ Real-Time Processing - Achieved <100ms response time",
-        "🎭 Face Recognition Magic - Deployed dlib neural networks",
-        "🐍 Python Sorcery - Mastered advanced algorithmic implementations"
+        "👁️ Real-Time Vision Mastery - Achieved instant face detection from live feeds",
+        "🎨 Visual Feedback Sorcery - Deployed color-coded recognition system",
+        "⚡ Performance Optimization Magic - Mastered frame processing efficiency",
+        "� Camera Configuration Wizardry - Conquered multi-device compatibility"
       ],
       bossFights: [
-        "⚔️ The Lighting Demon - Conquered varying illumination conditions with adaptive thresholds",
-        "🐉 The Multi-Face Hydra - Defeated simultaneous detection chaos with queue-based processing",
-        "👹 The Latency Monster - Slayed performance bottlenecks with optimized algorithms"
+        "📷 The Multi-Camera Hydra - Defeated device compatibility chaos with configurable indices",
+        "� The Lighting Demon - Conquered varying illumination with adaptive techniques",
+        "⚡ The Performance Dragon - Slayed processing bottlenecks with smart frame resizing"
       ],
-      bonusLevel: "🏆 Easter Egg: This CS50x final project can recognize faces even when partially obscured - a feature that wasn't in the original requirements but emerged during testing!"
+      bonusLevel: "🏆 Hidden Feature: The system can be extended with Gradio web interface for remote access - turning your local recognition system into a web-accessible security station!"
     }
   },
   {
     id: 'ai-text-summarizer',
     title: 'AI Text Summarizer',
-    description: 'Engineered a Python command-line tool for text and PDF summarization, leveraging advanced Hugging Face AI models. CS50p Final Project showcasing NLP capabilities.',
+    description: '📚 A Python command-line application that summarizes the content of any text or PDF file using advanced artificial intelligence models from Hugging Face. Users can specify the desired summary style (briefly, in detail, bullet points) with intelligent API integration and comprehensive error handling.',
     category: 'ai-cv',
-    skills: ['Python', 'Hugging Face', 'NLP', 'PDF Processing'],
+    skills: ['Python', 'Hugging Face BART', 'NLP', 'PDFPlumber', 'API Integration', 'CLI Development'],
     image: '/assets/images/ai-text-summarizer.png',
-    github: 'https://github.com/AlBaraa-1',
+    github: 'https://github.com/AlBaraa-1/cs50p-projects/tree/main/FinalProject',
     featured: true,
+    detailedDescription: '🤖 A comprehensive text summarization tool built as CS50P final project, featuring Hugging Face BART model integration, flexible summary styles, PDF processing capabilities, and robust error handling with complete pytest test coverage.',
+    challenges: [
+      'Integrating Hugging Face API with proper authentication and error handling',
+      'Processing both text and PDF files with different parsing requirements',
+      'Implementing flexible summary styles that work with AI model limitations',
+      'Creating comprehensive test coverage including API mocks and user input simulation',
+      'Building intuitive CLI interface with graceful error messaging'
+    ],
+    solutions: [
+      'Implemented secure environment variable-based API token management',
+      'Used PDFPlumber library for reliable PDF text extraction',
+      'Designed prompt engineering for different summary styles with BART model',
+      'Created pytest test suite with monkeypatch for mocking external dependencies',
+      'Built user-friendly CLI with clear prompts and file validation'
+    ],
+    outcomes: [
+      'Successfully processes both .txt and .pdf files with high accuracy',
+      'Supports multiple summary styles: brief, detailed, and bullet points',
+      'Includes comprehensive error handling for missing files and API issues',
+      'Features complete test coverage with automated pytest suite',
+      'Saves summaries to output.txt with console display'
+    ],
+    techStack: {
+      frontend: ['Command-Line Interface', 'Interactive Prompts'],
+      backend: ['Python', 'File I/O Processing'],
+      ai: ['Hugging Face BART', 'Transformer Models', 'NLP Pipeline'],
+      other: ['PDFPlumber', 'Requests Library', 'Environment Variables', 'Pytest Testing']
+    },
     gameDetails: {
-      questOverview: "📚 Epic Quest Completed! Forged a powerful AI text summarizer that transforms lengthy documents into concise insights, wielding Hugging Face transformers like a digital librarian's ultimate weapon.",
+      questOverview: "📚 Epic Quest Completed! Forged an intelligent document summarizer that wields Hugging Face BART transformers to distill lengthy texts into perfect insights. Like having a digital librarian that reads faster than light and remembers everything!",
       skillsUnlocked: [
-        "🤖 NLP Wizardry - Mastered transformer models and tokenization",
-        "📄 PDF Parsing Powers - Conquered complex document structures",
-        "🐍 Python CLI Mastery - Built intuitive command-line interfaces",
-        "⚡ Hugging Face Arsenal - Deployed state-of-the-art language models"
+        "🤖 BART Model Mastery - Deployed advanced transformer summarization",
+        "� PDF Sorcery - Conquered complex document parsing with PDFPlumber",
+        "🔧 API Integration Magic - Mastered Hugging Face authentication",
+        "� Test Automation Wizardry - Built comprehensive pytest coverage with mocks"
       ],
       bossFights: [
-        "📖 The PDF Fortress - Breached complex document layouts and formatting",
-        "🧠 The Context Overflow Dragon - Tamed massive text inputs with smart chunking",
-        "⚙️ The Model Selection Sphinx - Solved optimal transformer configuration puzzles"
+        "🔐 The API Authentication Dragon - Defeated token management challenges",
+        "📖 The PDF Parsing Hydra - Conquered complex document structure extraction",
+        "🎯 The Summary Style Sphinx - Mastered prompt engineering for different outputs",
+        "🧪 The Testing Demon - Vanquished complex mocking scenarios"
       ],
-      bonusLevel: "🎮 Secret Feature: The tool can summarize PDFs in multiple languages and automatically detects the optimal summary length based on content complexity!"
+      bonusLevel: "� CS50P Achievement Unlocked: This project demonstrates advanced Python concepts including API integration, file processing, testing, and CLI design - earning perfect marks in Harvard's CS50P final project evaluation!"
     }
   },
   {
@@ -149,26 +182,54 @@ export const projects: Project[] = [
   {
     id: 'color-detection',
     title: 'Color Detection with OpenCV',
-    description: 'A real-time color detection system using OpenCV and Python, featuring webcam integration, HSV color space processing, and dynamic mask creation. The system can detect specific colors (yellow by default) in video streams, draw bounding boxes around detected regions, and display both original and masked views simultaneously.',
+    description: '🌈 Real-time color detection system using OpenCV and Python that demonstrates HSV color space conversion for robust color detection. Captures video from webcam, applies dynamic masks for target colors (yellow by default), and visualizes detected regions with bounding boxes in real-time.',
     category: 'ai-cv',
-    skills: ['Python', 'OpenCV', 'NumPy', 'Computer Vision', 'Real-time Processing', 'HSV Color Space'],
+    skills: ['Python', 'OpenCV', 'NumPy', 'Pillow', 'HSV Color Space', 'Real-time Processing'],
     image: '/assets/images/color-detection.png',
-    github: 'https://github.com/AlBaraa-1/Color-Detection',
+    github: 'https://github.com/AlBaraa-1/Computer-vision/tree/main/color_detection',
     featured: true,
+    detailedDescription: '🎯 A comprehensive real-time color detection application that captures live video streams, converts frames to HSV color space for robust color isolation, creates dynamic masks for target colors, and displays both original frames and color masks simultaneously with bounding box visualization.',
+    challenges: [
+      'Achieving real-time performance with live video processing',
+      'Implementing robust color detection using HSV color space conversion',
+      'Creating accurate bounding box detection for irregular color regions',
+      'Building modular code structure for easy color customization',
+      'Handling varying lighting conditions and camera quality'
+    ],
+    solutions: [
+      'Utilized OpenCV optimized video capture and processing functions',
+      'Implemented HSV color space conversion for better color isolation',
+      'Applied morphological operations and contour detection for accurate bounding boxes',
+      'Created utility functions in separate modules for easy color range adjustments',
+      'Used dynamic thresholding and mask refinement techniques'
+    ],
+    outcomes: [
+      'Real-time color detection with smooth video processing',
+      'Accurate bounding box visualization around detected color regions',
+      'Modular architecture supporting easy color customization',
+      'Simultaneous display of original frame and color mask',
+      'Educational demonstration of computer vision fundamentals'
+    ],
+    techStack: {
+      frontend: ['OpenCV GUI', 'Real-time Video Display'],
+      backend: ['Python', 'Utility Functions'],
+      ai: ['OpenCV Computer Vision', 'HSV Color Processing', 'Contour Detection'],
+      other: ['NumPy Arrays', 'Pillow Image Processing', 'Webcam Integration']
+    },
     gameDetails: {
-      questOverview: "🌈 Chromatic Quest Mastered! Built a real-time color hunter that tracks specific hues through live video streams, creating dynamic masks and bounding boxes like a digital artist's targeting system.",
+      questOverview: "🌈 Chromatic Vision Quest Complete! Forged a real-time color tracking system that hunts specific hues through live video streams, painting dynamic masks and targeting boxes like a digital artist's precision tool.",
       skillsUnlocked: [
-        "👁️ Computer Vision Sight - Unlocked HSV color space mastery",
-        "📹 Real-Time Stream Powers - Conquered live webcam processing",
-        "🎯 Object Tracking Magic - Deployed dynamic bounding box algorithms",
-        "🔢 NumPy Matrix Mastery - Wielded advanced array manipulations"
+        "🎨 HSV Color Mastery - Conquered robust color space conversions",
+        "📹 Real-Time Vision Powers - Mastered live webcam stream processing",
+        "📦 Bounding Box Sorcery - Deployed accurate region detection algorithms",
+        "� Modular Architecture Magic - Built extensible color detection framework"
       ],
       bossFights: [
-        "🌈 The Color Chaos Dragon - Tamed HSV color space complexities and thresholds",
-        "⚡ The Frame Rate Demon - Defeated processing lag with optimized algorithms",
-        "👻 The Noise Phantom - Banished false positives with morphological operations"
+        "🌈 The HSV Transformation Dragon - Mastered color space conversion complexities",
+        "⚡ The Frame Rate Hydra - Conquered real-time processing performance challenges",
+        "👻 The Lighting Phantom - Defeated varying illumination conditions with dynamic thresholding"
       ],
-      bonusLevel: "🎨 Artist's Secret: The system can be easily modified to track any color by adjusting HSV ranges - perfect for creating interactive art installations or gesture-based controls!"
+      bonusLevel: "🎨 Hidden Feature: The modular design allows instant color switching by simply modifying BGR values - perfect for creating rainbow trackers, gesture controls, or interactive art installations!"
     }
   }
 ];

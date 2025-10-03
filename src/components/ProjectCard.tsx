@@ -22,8 +22,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         }
       },
       {
-        threshold: 0.3,
-        rootMargin: '-10% 0px'
+        threshold: 0.1,
+        rootMargin: '50px 0px'
       }
     );
 

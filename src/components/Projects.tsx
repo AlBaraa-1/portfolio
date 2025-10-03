@@ -26,11 +26,11 @@ const Projects: React.FC = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Staggered animation timeline
+          // Staggered animation timeline - reduced delays for faster response
           const timeline = [
-            { element: 'title', delay: 200 },
-            { element: 'filters', delay: 600 },
-            { element: 'cards', delay: 1000 }
+            { element: 'title', delay: 100 },
+            { element: 'filters', delay: 300 },
+            { element: 'cards', delay: 500 }
           ];
 
           timeline.forEach(({ element, delay }) => {
@@ -40,7 +40,10 @@ const Projects: React.FC = () => {
           });
         }
       },
-      { threshold: 0.1 }
+      { 
+        threshold: 0.05,
+        rootMargin: '100px 0px'
+      }
     );
 
     if (sectionRef.current) {
@@ -93,17 +96,17 @@ const Projects: React.FC = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-700 ${
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500 ${
           showElements.cards ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
           {filteredProjects.map((project, index) => (
             <div
               key={project.id}
-              className="transition-all duration-500"
+              className="transition-all duration-400"
               style={{
-                transitionDelay: `${index * 150}ms`,
+                transitionDelay: `${index * 100}ms`,
                 opacity: showElements.cards ? 1 : 0,
-                transform: showElements.cards ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)'
+                transform: showElements.cards ? 'translateY(0) scale(1)' : 'translateY(15px) scale(0.98)'
               }}
             >
               <ProjectCard project={project} />

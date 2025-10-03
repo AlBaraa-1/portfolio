@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ExternalLink, Github, Eye, Gamepad2 } from 'lucide-react';
 import { Project } from '../data/portfolioData';
+import { useNavigate } from 'react-router-dom';
 
 interface ProjectCardProps {
   project: Project;
@@ -10,6 +11,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const [isInView, setIsInView] = useState(false);
   const [showGameDetails, setShowGameDetails] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -206,7 +208,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           )}
           
           <button
-            onClick={() => window.open(`/projects/${project.id}`, '_blank')}
+            onClick={() => navigate(`/projects/${project.id}`)}
             className="group relative flex items-center justify-center gap-1 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium flex-1 touch-manipulation rounded-md shadow-sm border border-green-500/20 active:shadow-none transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98]"
             style={{
               backgroundColor: 'var(--bg-secondary)',

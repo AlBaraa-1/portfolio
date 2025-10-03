@@ -53,7 +53,7 @@ export const projects: Project[] = [
     description: 'Developed a real-time face detection and recognition system using Python, OpenCV, and the face_recognition library. CS50x Final Project demonstrating practical application of computer vision.',
     category: 'ai-cv',
     skills: ['Python', 'OpenCV', 'face_recognition', 'Computer Vision'],
-    image: '/assets/images/face-recognition.jpg',
+    image: '/assets/images/face-recognition.png',
     github: 'https://github.com/AlBaraa-1/cs50x-2024-projects/tree/main/Final%20Project',
     featured: true,
     detailedDescription: 'A comprehensive face recognition system that combines real-time face detection with accurate recognition capabilities. This project showcases the practical implementation of computer vision techniques in a real-world application.',

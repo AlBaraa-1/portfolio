@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ExternalLink, Github, Eye, Gamepad2 } from 'lucide-react';
+import { ExternalLink, Github, Eye } from 'lucide-react';
 import { Project } from '../data/portfolioData';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +9,6 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const [isInView, setIsInView] = useState(false);
-  const [showGameDetails, setShowGameDetails] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
@@ -35,9 +34,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     return () => observer.disconnect();
   }, []);
 
-  const toggleGameDetails = () => {
-    setShowGameDetails(!showGameDetails);
-  };
   return (
     <div
         ref={cardRef}
@@ -71,87 +67,32 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             {project.title}
           </h3>
           
-          {!showGameDetails ? (
-            <p className="text-sm mb-4 line-clamp-3"
-               style={{ color: 'var(--text-secondary)' }}>
-              {project.description}
-            </p>
-          ) : (
-            project.gameDetails && (
-              <div className="text-sm mb-4 space-y-3 animate-fadeIn">
-                {/* Quest Overview */}
-                <div>
-                  <p className="font-medium mb-1" style={{ color: 'var(--accent)' }}>Quest Overview:</p>
-                  <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                    {project.gameDetails.questOverview}
-                  </p>
-                </div>
-                
-                {/* Skills Unlocked */}
-                <div>
-                  <p className="font-medium mb-1" style={{ color: 'var(--accent)' }}>Skills Unlocked:</p>
-                  <ul className="text-xs space-y-1" style={{ color: 'var(--text-secondary)' }}>
-                    {project.gameDetails.skillsUnlocked.slice(0, 2).map((skill, index) => (
-                      <li key={index} className="leading-tight">{skill}</li>
-                    ))}
-                  </ul>
-                </div>
-                
-                {/* Boss Fights */}
-                <div>
-                  <p className="font-medium mb-1" style={{ color: 'var(--accent)' }}>Boss Fights:</p>
-                  <ul className="text-xs space-y-1" style={{ color: 'var(--text-secondary)' }}>
-                    {project.gameDetails.bossFights.slice(0, 1).map((fight, index) => (
-                      <li key={index} className="leading-tight">{fight}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            )
-          )}
+          <p className="text-sm mb-4 line-clamp-3"
+             style={{ color: 'var(--text-secondary)' }}>
+            {project.description}
+          </p>
 
           {/* Skill Tags */}
-          {!showGameDetails && (
-            <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4">
-              {project.skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="px-2 sm:px-3 py-1 text-xs rounded-full border transition-colors duration-300 hover:scale-105 hover:bg-opacity-10 hover:bg-current"
-                  style={{ 
-                    borderColor: 'var(--accent)',
-                    color: 'var(--accent)',
-                    backgroundColor: 'transparent'
-                  }}
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          )}
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4">
+            {project.skills.map((skill) => (
+              <span
+                key={skill}
+                className="px-2 sm:px-3 py-1 text-xs rounded-full border transition-colors duration-300 hover:scale-105 hover:bg-opacity-10 hover:bg-current"
+                style={{ 
+                  borderColor: 'var(--accent)',
+                  color: 'var(--accent)',
+                  backgroundColor: 'transparent'
+                }}
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Action Buttons */}
         <div className="flex flex-row gap-2 mt-auto pt-4 border-t" style={{ borderColor: 'var(--border)' }}>
-          {/* Game Details Toggle */}
-          {project.gameDetails && (
-            <button
-              onClick={toggleGameDetails}
-              className="group relative flex items-center justify-center gap-1 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium flex-1 touch-manipulation rounded-md shadow-sm border transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98]"
-              style={{
-                backgroundColor: showGameDetails ? 'var(--accent)' : 'var(--bg-secondary)',
-                color: showGameDetails ? 'var(--bg-primary)' : 'var(--text-primary)',
-                borderColor: 'var(--accent)',
-                WebkitTapHighlightColor: 'transparent'
-              }}
-            >
-              <div className="relative z-10 flex items-center justify-center gap-1">
-                <Gamepad2 className="w-3 h-3 sm:w-4 sm:h-4 transition-all duration-200 sm:group-hover:scale-110" />
-                <span className="transition-all duration-200">
-                  {showGameDetails ? 'Info' : 'Quest'}
-                </span>
-              </div>
-            </button>
-          )}
+          {/* Removed Quest toggle button */}
           
           {project.liveDemo && (
             <button
@@ -208,7 +149,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           )}
           
           <button
-            onClick={() => navigate(`/projects/${project.id}`)}
+            onClick={() => {
+              // Add a smooth transition effect before navigation
+              const card = cardRef.current;
+              if (card) {
+                card.style.transform = 'scale(0.95)';
+                card.style.opacity = '0.8';
+                setTimeout(() => {
+                  navigate(`/projects/${project.id}`);
+                }, 150);
+              } else {
+                navigate(`/projects/${project.id}`);
+              }
+            }}
             className="group relative flex items-center justify-center gap-1 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium flex-1 touch-manipulation rounded-md shadow-sm border border-green-500/20 active:shadow-none transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98]"
             style={{
               backgroundColor: 'var(--bg-secondary)',
@@ -234,15 +187,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         </div>
       </div>
       
-      <style>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.3s ease-out;
-        }
-      `}</style>
+      
     </div>
   );
 };

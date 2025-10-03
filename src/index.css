@@ -141,3 +141,57 @@ span { display: inline-block; }
     right: 1rem;
   }
 }
+
+/* Page transition animations */
+.page-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Smooth slide-in animation for project pages */
+.slide-from-right {
+  animation: slideInFromRight 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(30px) scale(0.98);
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Enhanced fade-in for home page */
+.fade-in-up {
+  animation: fadeInUpSmooth 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes fadeInUpSmooth {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth transitions for navigation buttons */
+.nav-transition {
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-transition:active {
+  transform: scale(0.95);
+}

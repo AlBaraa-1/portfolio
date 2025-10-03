@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import { ExternalLink, Github, Trophy, Rocket, Swords, Map, Sparkles, Eye } from 'lucide-react';
+import { ExternalLink, Github, Trophy, Rocket, Swords, Map, Sparkles, Eye, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Project } from '../data/portfolioData';
 import { generateProjectDetails } from '../utils/gamifiedDetails';
 
@@ -47,13 +48,39 @@ const GameProjectDetail: React.FC<GameProjectDetailProps> = ({
   demoEmbed,
   links
 }) => {
+  const navigate = useNavigate();
   const summary = useMemo(() => generateProjectDetails(project), [project]);
   const items: MediaItem[] = media ?? [{ type: 'image', src: project.image, alt: project.title }];
   const skills = inventory ?? project.skills;
   const linkSet = { github: project.github, liveDemo: project.liveDemo, ...(links ?? {}) };
 
+  const handleBackClick = () => {
+    // Add smooth transition effect before navigation
+    document.body.style.opacity = '0.9';
+    document.body.style.transform = 'scale(0.98)';
+    setTimeout(() => {
+      navigate('/', { state: { fromProject: true } });
+    }, 150);
+  };
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      {/* Back Button */}
+      <div className="fixed top-6 left-6 z-50">
+        <button
+          onClick={handleBackClick}
+          className="nav-transition flex items-center gap-2 px-4 py-2 rounded-lg border backdrop-blur-sm transition-all duration-200 hover:scale-105 hover:shadow-lg"
+          style={{ 
+            backgroundColor: 'var(--bg-secondary)', 
+            borderColor: 'var(--border)',
+            color: 'var(--text-primary)'
+          }}
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span className="hidden sm:inline text-sm font-medium">Back to Portfolio</span>
+        </button>
+      </div>
+
       {/* Hero Banner */}
   <div className="relative overflow-hidden py-10 sm:py-14 md:py-20 border-b" style={{ borderColor: 'var(--border)' }}>
         <div className="absolute inset-0 pointer-events-none">

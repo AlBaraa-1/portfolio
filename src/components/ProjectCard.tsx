@@ -35,10 +35,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
           <div
         ref={cardRef}
-        className={`bg-opacity-20 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg transition-all duration-500 sm:hover:scale-105 active:scale-98 sm:hover:shadow-xl transform ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+        className={`bg-opacity-20 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg transition-all duration-500 sm:hover:scale-105 active:scale-98 sm:hover:shadow-xl transform flex flex-col h-full ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
         style={{ backgroundColor: 'var(--bg-secondary)' }}>
       {/* Project Image */}
-      <div className="relative overflow-hidden h-48">
+      <div className="relative overflow-hidden aspect-video">
         <img
           src={project.image}
           alt={project.title}
@@ -57,8 +57,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       </div>
 
       {/* Project Content */}
-      <div className="p-4 sm:p-6 flex flex-col min-h-[280px] sm:min-h-[300px]">
-        <div className="flex-grow space-y-2 sm:space-y-3">
+      <div className="p-4 sm:p-6 flex flex-col flex-1">
+        <div className="flex-1 space-y-2 sm:space-y-3">
           <h3 className="text-xl font-bold mb-2 group-hover:text-opacity-80 transition-colors"
               style={{ color: 'var(--text-primary)' }}>
             {project.title}
@@ -88,11 +88,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         </div>
 
         {/* Action Buttons */}
-        <div className="grid grid-cols-1 sm:flex sm:flex-wrap gap-2 mt-auto pt-4 border-t" style={{ borderColor: 'var(--border)' }}>
+        <div className="flex flex-row gap-2 mt-auto pt-4 border-t" style={{ borderColor: 'var(--border)' }}>
           {project.liveDemo && (
             <button
               onClick={() => window.open(project.liveDemo, '_blank')}
-              className="group relative flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium w-full sm:w-auto sm:flex-1 touch-manipulation rounded-md sm:rounded-none shadow-sm sm:shadow-none border border-blue-500/20 sm:border-0 mb-2 sm:mb-0 active:shadow-none transition-all duration-200 hover:sm:shadow-lg hover:sm:-translate-y-0.5 active:scale-[0.98] sm:active:scale-100"
+              className="group relative flex items-center justify-center gap-1 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium flex-1 touch-manipulation rounded-md shadow-sm border border-blue-500/20 active:shadow-none transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98]"
               style={{
                 backgroundColor: 'var(--bg-secondary)',
                 color: 'var(--text-primary)',
@@ -109,8 +109,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                   <div className="absolute inset-0 animate-pulse-slow mix-blend-overlay"></div>
                 </div>
               </div>
-              <div className="relative z-10 flex items-center justify-center gap-2">
-                <ExternalLink className="w-4 h-4 transition-all duration-200 sm:group-hover:scale-110 sm:group-hover:rotate-6" />
+              <div className="relative z-10 flex items-center justify-center gap-1">
+                <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 transition-all duration-200 sm:group-hover:scale-110 sm:group-hover:rotate-6" />
                 <span className="transition-all duration-200 sm:group-hover:translate-x-0.5">Demo</span>
               </div>
             </button>
@@ -119,7 +119,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           {project.github && (
             <button
               onClick={() => window.open(project.github, '_blank')}
-              className="group relative flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium w-full sm:w-auto sm:flex-1 touch-manipulation rounded-md sm:rounded-none shadow-sm sm:shadow-none border border-gray-500/20 sm:border-0 mb-2 sm:mb-0 active:shadow-none transition-all duration-200 hover:sm:shadow-lg hover:sm:-translate-y-0.5 active:scale-[0.98] sm:active:scale-100"
+              className="group relative flex items-center justify-center gap-1 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium flex-1 touch-manipulation rounded-md shadow-sm border border-gray-500/20 active:shadow-none transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98]"
               style={{
                 backgroundColor: 'var(--bg-secondary)',
                 color: 'var(--text-primary)',
@@ -136,8 +136,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                   <div className="absolute inset-0 animate-pulse-slow mix-blend-overlay"></div>
                 </div>
               </div>
-              <div className="relative z-10 flex items-center justify-center gap-2">
-                <Github className="w-4 h-4 transition-all duration-200 sm:group-hover:scale-110 sm:group-hover:rotate-6" />
+              <div className="relative z-10 flex items-center justify-center gap-1">
+                <Github className="w-3 h-3 sm:w-4 sm:h-4 transition-all duration-200 sm:group-hover:scale-110 sm:group-hover:rotate-6" />
                 <span className="transition-all duration-200 sm:group-hover:translate-x-0.5">GitHub</span>
               </div>
             </button>
@@ -145,7 +145,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           
           <button
             onClick={() => window.open(`/projects/${project.id}`, '_blank')}
-            className="group relative flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium w-full sm:w-auto sm:flex-1 touch-manipulation rounded-md sm:rounded-none shadow-sm sm:shadow-none border border-green-500/20 sm:border-0 mb-2 sm:mb-0 active:shadow-none transition-all duration-200 hover:sm:shadow-lg hover:sm:-translate-y-0.5 active:scale-[0.98] sm:active:scale-100"
+            className="group relative flex items-center justify-center gap-1 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium flex-1 touch-manipulation rounded-md shadow-sm border border-green-500/20 active:shadow-none transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98]"
             style={{
               backgroundColor: 'var(--bg-secondary)',
               color: 'var(--text-primary)',
@@ -157,11 +157,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               <div className="absolute inset-0 w-2 bg-gradient-to-r from-green-500 to-emerald-600 transition-all duration-300 ease-out group-hover:w-full opacity-80"></div>
             </div>
             {/* Mobile tap effect */}
-            <div className="absolute inset-0 sm:hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-600 opacity-0 transition-opacity duration-150 ease-out group-active:opacity-10"></div>
+            <div className="absolute inset-0 sm:hidden rounded-md overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-600 opacity-0 transition-opacity duration-150 ease-out group-active:opacity-20">
+                <div className="absolute inset-0 animate-pulse-slow mix-blend-overlay"></div>
+              </div>
             </div>
-            <Eye className="w-4 h-4 z-10 transition-transform duration-150 sm:group-hover:scale-110" />
-            <span className="z-10">Details</span>
+            <div className="relative z-10 flex items-center justify-center gap-1">
+              <Eye className="w-3 h-3 sm:w-4 sm:h-4 transition-transform duration-150 sm:group-hover:scale-110" />
+              <span className="transition-all duration-200 sm:group-hover:translate-x-0.5">Details</span>
+            </div>
           </button>
         </div>
       </div>

@@ -4,7 +4,27 @@ import Badge from './Badge';
 
 const Certifications: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [showAllMobile, setShowAllMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Mobile-specific limits
+  const mobileLimit = 4; // Show only 4 additional badges on mobile
+  const nonFeaturedCerts = certifications.filter(cert => !cert.featured);
+  const displayedCerts = isMobile && !showAllMobile 
+    ? nonFeaturedCerts.slice(0, mobileLimit) 
+    : nonFeaturedCerts;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -55,7 +75,7 @@ const Certifications: React.FC = () => {
             <h3 className="text-xl sm:text-2xl font-bold text-center mb-8" style={{ color: '#fbbf24' }}>
               ⭐ Featured Achievements
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 justify-items-center">
               {certifications
                 .filter(cert => cert.featured)
                 .map((cert, index) => (
@@ -75,34 +95,69 @@ const Certifications: React.FC = () => {
         )}
 
         {/* Other Certifications */}
-        {certifications.some(cert => !cert.featured) && (
+        {displayedCerts.length > 0 && (
           <div className={`transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
-            <h3 className="text-xl sm:text-2xl font-bold text-center mb-8" style={{ color: 'var(--text-primary)' }}>
-              Additional Certifications
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 justify-items-center">
-              {certifications
-                .filter(cert => !cert.featured)
-                .map((cert, index) => (
-                  <div
-                    key={cert.id}
-                    className="transition-all duration-300"
-                    style={{
-                      animationDelay: `${index * 150}ms`,
-                      animation: isVisible ? 'slideInUp 0.6s ease-out forwards' : 'none'
-                    }}
-                  >
-                    <Badge certification={cert} />
-                  </div>
-                ))}
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <h3 className="text-xl sm:text-2xl font-bold text-center" style={{ color: 'var(--text-primary)' }}>
+                Additional Certifications
+              </h3>
+              {isMobile && nonFeaturedCerts.length > mobileLimit && (
+                <span className="text-sm px-3 py-1 rounded-full" style={{ 
+                  backgroundColor: 'var(--bg-secondary)', 
+                  color: 'var(--text-secondary)' 
+                }}>
+                  {showAllMobile ? nonFeaturedCerts.length : `${mobileLimit}/${nonFeaturedCerts.length}`}
+                </span>
+              )}
             </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 justify-items-center">
+              {displayedCerts.map((cert, index) => (
+                <div
+                  key={cert.id}
+                  className="transition-all duration-300"
+                  style={{
+                    animationDelay: `${index * 150}ms`,
+                    animation: isVisible ? 'slideInUp 0.6s ease-out forwards' : 'none'
+                  }}
+                >
+                  <Badge certification={cert} />
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile Show More/Less Button */}
+            {isMobile && nonFeaturedCerts.length > mobileLimit && (
+              <div className="text-center mt-8">
+                <button
+                  onClick={() => setShowAllMobile(!showAllMobile)}
+                  className="px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105 active:scale-95 flex items-center gap-2 mx-auto"
+                  style={{
+                    backgroundColor: 'var(--accent)',
+                    color: 'var(--bg-primary)',
+                    boxShadow: '0 4px 12px rgba(var(--accent-rgb), 0.3)'
+                  }}
+                >
+                  <span>{showAllMobile ? 'Show Less' : `Show ${nonFeaturedCerts.length - mobileLimit} More`}</span>
+                  <svg 
+                    className={`w-4 h-4 transition-transform duration-200 ${showAllMobile ? 'rotate-180' : ''}`}
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              </div>
+            )}
           </div>
         )}
 
         {/* Stats Section */}
-        <div className={`mt-8 sm:mt-12 md:mt-16 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className={`mt-8 sm:mt-12 md:mt-16 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className={`grid gap-4 sm:gap-6 md:gap-8 ${isMobile ? 'grid-cols-2' : 'grid-cols-2 md:grid-cols-2 lg:grid-cols-4'}`}>
           <div className="text-center p-4 sm:p-6 rounded-lg glow-border transition-all duration-300 hover:scale-105"
                style={{ backgroundColor: 'var(--bg-secondary)' }}>
             <div className="text-2xl sm:text-3xl font-bold mb-2" style={{ color: 'var(--accent)' }}>
@@ -142,6 +197,7 @@ const Certifications: React.FC = () => {
               Programming Languages
             </div>
           </div>
+        </div>
         </div>
 
         {/* Call to Action */}

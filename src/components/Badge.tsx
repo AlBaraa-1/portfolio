@@ -55,7 +55,7 @@ const Badge: React.FC<BadgeProps> = ({ certification }) => {
           {/* Outer Rotating Aura */}
           <div className="absolute inset-0 rounded-full" 
                style={{
-                 background: 'conic-gradient(from 0deg, rgba(251, 191, 36, 0.8), rgba(255, 215, 0, 0.6), rgba(251, 191, 36, 0.4), rgba(255, 223, 0, 0.8), rgba(251, 191, 36, 0.8))',
+                 background: 'conic-gradient(from 0deg, rgba(245, 158, 11, 0.8), rgba(249, 115, 22, 0.6), rgba(245, 158, 11, 0.4), rgba(251, 146, 60, 0.8), rgba(245, 158, 11, 0.8))',
                  filter: 'blur(12px)',
                  animation: 'auraGlow 4s linear infinite',
                  zIndex: -3
@@ -65,7 +65,7 @@ const Badge: React.FC<BadgeProps> = ({ certification }) => {
           {/* Middle Pulsing Aura */}
           <div className="absolute inset-0 rounded-full" 
                style={{
-                 background: 'radial-gradient(circle, rgba(251, 191, 36, 0.7) 0%, rgba(251, 191, 36, 0.4) 40%, rgba(251, 191, 36, 0.2) 70%, transparent 100%)',
+                 background: 'radial-gradient(circle, rgba(245, 158, 11, 0.7) 0%, rgba(245, 158, 11, 0.4) 40%, rgba(245, 158, 11, 0.2) 70%, transparent 100%)',
                  filter: 'blur(6px)',
                  animation: 'aurapulse 2s ease-in-out infinite',
                  zIndex: -2
@@ -75,7 +75,7 @@ const Badge: React.FC<BadgeProps> = ({ certification }) => {
           {/* Inner Steady Glow */}
           <div className="absolute inset-0 rounded-full" 
                style={{
-                 background: 'radial-gradient(circle, rgba(251, 191, 36, 0.4) 0%, rgba(251, 191, 36, 0.2) 60%, transparent 80%)',
+                 background: 'radial-gradient(circle, rgba(245, 158, 11, 0.4) 0%, rgba(245, 158, 11, 0.2) 60%, transparent 80%)',
                  transform: 'scale(1.3)',
                  filter: 'blur(3px)',
                  zIndex: -1
@@ -110,20 +110,20 @@ const Badge: React.FC<BadgeProps> = ({ certification }) => {
         {...handleMouseEvents}
       >
                 <div className={`w-28 sm:w-32 h-28 sm:h-32 rounded-full border-2 flex flex-col items-center justify-center p-3 sm:p-4 transition-all duration-150 hover:scale-105 active:scale-95 touch-none sm:touch-auto group relative overflow-hidden ring-2 ring-opacity-60 ${
-                  certification.featured ? 'ring-yellow-400' : 'ring-[var(--accent)]'
+                  certification.featured ? 'ring-orange-500' : 'ring-[var(--accent)]'
                 }`}
              style={{ 
-               borderColor: certification.featured ? '#fbbf24' : 'var(--accent)',
-               backgroundColor: certification.featured ? 'rgba(251, 191, 36, 0.1)' : 'rgba(var(--accent-rgb), 0.1)',
+               borderColor: certification.featured ? '#f59e0b' : 'var(--accent)',
+               backgroundColor: certification.featured ? 'rgba(245, 158, 11, 0.1)' : 'rgba(var(--accent-rgb), 0.1)',
                boxShadow: certification.featured 
-                 ? '0 10px 15px -3px rgba(251, 191, 36, 0.3), 0 4px 6px -2px rgba(251, 191, 36, 0.05)' 
+                 ? '0 10px 15px -3px rgba(245, 158, 11, 0.4), 0 4px 6px -2px rgba(245, 158, 11, 0.1)' 
                  : '0 10px 15px -3px rgba(var(--accent-rgb), 0.3), 0 4px 6px -2px rgba(var(--accent-rgb), 0.05)'
              }}>
           {/* Badge Indicator */}
           <div className={`absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shadow-lg ${
-            certification.featured ? 'bg-yellow-400 text-black' : 'text-white'
+            certification.featured ? 'bg-orange-500 text-white' : 'text-white'
           }`} style={{
-            backgroundColor: certification.featured ? '#fbbf24' : 'var(--accent)'
+            backgroundColor: certification.featured ? '#f59e0b' : 'var(--accent)'
           }}>
             {certification.featured ? '⭐' : '🏆'}
           </div>
@@ -131,8 +131,10 @@ const Badge: React.FC<BadgeProps> = ({ certification }) => {
           <div className="text-2xl sm:text-3xl mb-1.5 sm:mb-2">{certification.icon}</div>
           <div className="text-[10px] sm:text-xs font-bold text-center leading-tight tracking-wide"
                style={{ 
-                 color: certification.featured ? '#fbbf24' : 'var(--text-primary)',
-                 textShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)'
+                 color: certification.featured ? '#f59e0b' : 'var(--text-primary)',
+                 textShadow: certification.featured 
+                   ? '0px 2px 4px rgba(0, 0, 0, 0.3), 0px 0px 8px rgba(245, 158, 11, 0.4)' 
+                   : '0px 1px 2px rgba(0, 0, 0, 0.1)'
                }}>
             {certification.title.split(':')[0]}
           </div>
@@ -143,32 +145,33 @@ const Badge: React.FC<BadgeProps> = ({ certification }) => {
       {showTooltip && (
         <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 z-20 animate-fadeIn">
           <div className={`bg-opacity-95 backdrop-blur-md rounded-lg p-3 sm:p-4 shadow-lg border max-w-xs w-[250px] sm:w-64 transform transition-all duration-100 ease-out animate-fade-in ring-2 ring-opacity-50 ${
-            certification.featured ? 'ring-yellow-400' : 'ring-[var(--accent)]'
+            certification.featured ? 'ring-orange-500' : 'ring-[var(--accent)]'
           }`}
                onClick={(e) => e.stopPropagation()}
                style={{ 
-                 backgroundColor: certification.featured ? 'rgba(251, 191, 36, 0.05)' : 'rgba(var(--accent-rgb), 0.05)',
-                 borderColor: certification.featured ? '#fbbf24' : 'var(--accent)',
+                 backgroundColor: certification.featured ? 'rgba(245, 158, 11, 0.08)' : 'rgba(var(--accent-rgb), 0.05)',
+                 borderColor: certification.featured ? '#f59e0b' : 'var(--accent)',
                  boxShadow: certification.featured 
-                   ? '0 20px 25px -5px rgba(251, 191, 36, 0.2), 0 10px 10px -5px rgba(251, 191, 36, 0.1)' 
+                   ? '0 20px 25px -5px rgba(245, 158, 11, 0.25), 0 10px 10px -5px rgba(245, 158, 11, 0.1)' 
                    : '0 20px 25px -5px rgba(var(--accent-rgb), 0.2), 0 10px 10px -5px rgba(var(--accent-rgb), 0.1)'
                }}>
             
             {/* Badge Header */}
             <div className={`flex items-center gap-2 mb-3 pb-2 border-b border-opacity-30 ${
-              certification.featured ? 'border-yellow-400' : 'border-[var(--accent)]'
+              certification.featured ? 'border-orange-500' : 'border-[var(--accent)]'
             }`}>
               <div className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold ${
-                certification.featured ? 'bg-yellow-400 text-black' : 'text-white'
+                certification.featured ? 'bg-orange-500 text-white' : 'text-white'
               }`} style={{
-                backgroundColor: certification.featured ? '#fbbf24' : 'var(--accent)'
+                backgroundColor: certification.featured ? '#f59e0b' : 'var(--accent)'
               }}>
                 {certification.featured ? '⭐' : '🏆'}
               </div>
               <span className={`text-xs font-bold tracking-wide ${
                 certification.featured ? 'text-yellow-400' : ''
               }`} style={{
-                color: certification.featured ? '#fbbf24' : 'var(--accent)'
+                color: certification.featured ? '#f59e0b' : 'var(--accent)',
+                textShadow: certification.featured ? '0px 1px 2px rgba(0, 0, 0, 0.2)' : 'none'
               }}>
                 {certification.featured ? 'FEATURED ACHIEVEMENT' : 'PROFESSIONAL CERTIFICATION'}
               </span>
@@ -177,14 +180,17 @@ const Badge: React.FC<BadgeProps> = ({ certification }) => {
             <div className={`text-sm font-bold mb-2 leading-snug tracking-wide ${
               certification.featured ? 'text-yellow-400' : ''
             }`} style={{ 
-              color: certification.featured ? '#fbbf24' : 'var(--text-primary)', 
-              textShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)' 
+              color: certification.featured ? '#f59e0b' : 'var(--text-primary)', 
+              textShadow: certification.featured 
+                ? '0px 2px 4px rgba(0, 0, 0, 0.3), 0px 0px 6px rgba(245, 158, 11, 0.3)' 
+                : '0px 1px 2px rgba(0, 0, 0, 0.1)' 
             }}>
               {certification.title}
             </div>
             <div className="text-xs mb-2 font-medium tracking-wide" style={{ 
-              color: certification.featured ? '#fbbf24' : 'var(--accent)', 
-              opacity: 0.9 
+              color: certification.featured ? '#f59e0b' : 'var(--accent)', 
+              opacity: 0.95,
+              textShadow: certification.featured ? '0px 1px 2px rgba(0, 0, 0, 0.2)' : 'none'
             }}>
               {certification.issuer} • {certification.date}
             </div>
@@ -198,14 +204,15 @@ const Badge: React.FC<BadgeProps> = ({ certification }) => {
                   certification.featured ? 'font-semibold' : ''
                 }`}
                 style={{ 
-                  backgroundColor: certification.featured ? 'rgba(251, 191, 36, 0.1)' : 'var(--bg-primary)',
-                  color: certification.featured ? '#fbbf24' : 'var(--accent)',
-                  border: certification.featured ? '1px solid #fbbf24' : '1px solid var(--accent)'
+                  backgroundColor: certification.featured ? 'rgba(245, 158, 11, 0.1)' : 'var(--bg-primary)',
+                  color: certification.featured ? '#f59e0b' : 'var(--accent)',
+                  border: certification.featured ? '1px solid #f59e0b' : '1px solid var(--accent)',
+                  textShadow: certification.featured ? '0px 1px 2px rgba(0, 0, 0, 0.2)' : 'none'
                 }}>
                 <div className="absolute inset-0 opacity-0 group-hover/btn:opacity-10 transition-opacity duration-150"
                      style={{ 
                        background: certification.featured 
-                         ? 'linear-gradient(45deg, #fbbf24, transparent, #fbbf24)' 
+                         ? 'linear-gradient(45deg, #f59e0b, transparent, #f59e0b)' 
                          : 'linear-gradient(45deg, var(--accent), transparent, var(--accent))' 
                      }}></div>
               
@@ -224,7 +231,7 @@ const Badge: React.FC<BadgeProps> = ({ certification }) => {
           {/* Tooltip arrow */}
           <div className="absolute top-full left-1/2 transform -translate-x-1/2">
             <div className="border-8 border-transparent border-t-current"
-                 style={{ color: certification.featured ? '#fbbf24' : 'var(--accent)' }}></div>
+                 style={{ color: certification.featured ? '#f59e0b' : 'var(--accent)' }}></div>
           </div>
         </div>
       )}
